@@ -248,15 +248,10 @@ footer {
   <p>Practice diploma exam questions with answers.</p>
 
   <label>Select Subject</label>
-  <select id="pyqSubject">
-    <option value="">Choose Subject</option>
-    <option value="som">Strength of Materials</option>
-    <option value="fmm">Fluid Mechanics and Machinery</option>
-    <option value="fme">Fundamentals of Mechanical Engineering</option>
-    <option value="automobile">Automobile Engineering</option>
-    <option value="thermo">Thermal Engineering</option>
-    <option value="manufacturing">Manufacturing Technology</option>
-  </select>
+ <label>Select Subject</label>
+<select id="pyqSubject">
+  <option value="">Choose Subject</option>
+</select>
 
   <button onclick="loadPYQ()">Show Questions</button>
 
@@ -466,6 +461,48 @@ renderTasks();
   `;
 }
   const diplomaPYQ = {
+    const diplomaSubjects = {
+  "Mechanical Engineering": {
+    1: ["Basic Mathematics", "Communication Skills", "Engineering Graphics", "Engineering Workshop Practice", "Basic Science"],
+    2: ["Applied Mathematics", "Applied Science", "Engineering Mechanics", "Basic Electrical Engineering", "Engineering Materials"],
+    3: ["Strength of Materials", "Fluid Mechanics and Machinery", "Thermal Engineering", "Production Drawing"],
+    4: ["Theory of Machines", "Manufacturing Processes", "Metrology and Quality Control"],
+    5: ["Design of Machine Elements", "Industrial Engineering", "Refrigeration and Air Conditioning"],
+    6: ["Automobile Engineering", "CAD/CAM", "Production Management"]
+  },
+  "Civil Engineering": {
+    1: ["Basic Mathematics", "Communication Skills", "Engineering Graphics"],
+    2: ["Applied Mathematics", "Applied Science", "Engineering Mechanics"],
+    3: ["Building Materials", "Surveying", "Strength of Materials"],
+    4: ["Concrete Technology", "Structural Mechanics", "Hydraulics"],
+    5: ["Design of Structures", "Transportation Engineering", "Environmental Engineering"],
+    6: ["Estimating and Costing", "Construction Management", "Irrigation Engineering"]
+  },
+  "Computer Engineering": {
+    1: ["Basic Mathematics", "Communication Skills", "Fundamentals of ICT"],
+    2: ["Programming in C", "Database Management", "Digital Techniques"],
+    3: ["Data Structures", "Object Oriented Programming", "Computer Networks"],
+    4: ["Java Programming", "Operating Systems", "Software Engineering"],
+    5: ["Web Development", "Cyber Security", "Cloud Computing"],
+    6: ["Mobile Application Development", "Advanced Java", "Project Work"]
+  },
+  "Electrical Engineering": {
+    1: ["Basic Mathematics", "Communication Skills", "Engineering Graphics"],
+    2: ["Applied Science", "Electrical Circuits", "Electrical Measurements"],
+    3: ["Electrical Machines", "Electrical Power Generation", "Electrical Engineering Materials"],
+    4: ["Transformers", "DC Machines", "Electrical Installation"],
+    5: ["Power Systems", "Control Systems", "Electrical Drives"],
+    6: ["Switchgear and Protection", "Renewable Energy", "Industrial Automation"]
+  },
+  "Automobile Engineering": {
+    1: ["Basic Mathematics", "Communication Skills", "Engineering Graphics"],
+    2: ["Applied Science", "Engineering Mechanics", "Automobile Fundamentals"],
+    3: ["Automobile Engines", "Automobile Chassis", "Vehicle Electrical Systems"],
+    4: ["Automobile Transmission", "Automobile Electrical Equipment", "Vehicle Maintenance"],
+    5: ["Automobile Design", "Vehicle Testing", "Automobile Pollution Control"],
+    6: ["Automobile Technology", "Automotive Electronics", "Project Work"]
+  }
+};
   som: [
     {
       question: "State Hooke's Law.",
@@ -491,7 +528,29 @@ renderTasks();
     }
   ]
 };
+function updatePYQSubjects() {
+  const branch = document.getElementById("dBranch").value;
+  const semester = document.getElementById("dSemester").value;
+  const subjectSelect = document.getElementById("pyqSubject");
 
+  const subjects = diplomaSubjects[branch]?.[semester] || [];
+
+  subjectSelect.innerHTML = '<option value="">Choose Subject</option>';
+
+  subjects.forEach((subject) => {
+    const option = document.createElement("option");
+    option.value = subject;
+    option.textContent = subject;
+    subjectSelect.appendChild(option);
+  });
+
+  document.getElementById("pyqList").innerHTML = "";
+}
+
+document.getElementById("dBranch").addEventListener("change", updatePYQSubjects);
+document.getElementById("dSemester").addEventListener("change", updatePYQSubjects);
+
+updatePYQSubjects();
 function loadPYQ() {
   const subject = document.getElementById("pyqSubject").value;
   const result = document.getElementById("pyqList");
