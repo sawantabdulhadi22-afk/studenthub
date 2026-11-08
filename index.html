@@ -201,7 +201,42 @@ footer {
     Start studying →
   </button>
 </section>
+<section class="card" id="diploma" style="margin:25px auto;max-width:1150px">
+  <h2>🎓 Diploma Hub</h2>
+  <p>Your complete diploma engineering learning centre.</p>
 
+  <label>Choose your education board</label>
+  <select id="dBoard">
+    <option value="MSBTE">MSBTE Maharashtra</option>
+    <option value="BTEUP">BTE Uttar Pradesh</option>
+    <option value="DTEK">DTE Karnataka</option>
+    <option value="TNDOTE">TNDOTE Tamil Nadu</option>
+    <option value="WBSCTE">WBSCTE West Bengal</option>
+    <option value="SBTE">SBTE Bihar</option>
+  </select>
+
+  <label>Choose your branch</label>
+  <select id="dBranch">
+    <option>Mechanical Engineering</option>
+    <option>Civil Engineering</option>
+    <option>Computer Engineering</option>
+    <option>Electrical Engineering</option>
+    <option>Automobile Engineering</option>
+  </select>
+
+  <label>Choose semester</label>
+  <select id="dSemester">
+    <option value="1">Semester 1</option>
+    <option value="2">Semester 2</option>
+    <option value="3">Semester 3</option>
+    <option value="4">Semester 4</option>
+    <option value="5">Semester 5</option>
+    <option value="6">Semester 6</option>
+  </select>
+
+  <button onclick="openDiploma()">Explore My Diploma</button>
+  <div id="dResult"></div>
+</section>
 <main>
 
 <h2>Your Dashboard 👋</h2>
@@ -375,6 +410,35 @@ function nextCard() {
 }
 
 renderTasks();
+  function openDiploma() {
+  const board = document.getElementById("dBoard").value;
+  const branch = document.getElementById("dBranch").value;
+  const semester = document.getElementById("dSemester").value;
+
+  const result = document.getElementById("dResult");
+
+  result.innerHTML = `
+    <div class="card" style="margin-top:20px;padding:20px;">
+      <h2>🎓 Your Diploma Dashboard</h2>
+
+      <p><strong>Board:</strong> ${board}</p>
+      <p><strong>Branch:</strong> ${branch}</p>
+      <p><strong>Semester:</strong> ${semester}</p>
+
+      <h3>📚 Learning Resources</h3>
+      <ul>
+        <li>Subject-wise notes</li>
+        <li>Important questions</li>
+        <li>Previous year question papers</li>
+        <li>MCQ practice</li>
+        <li>Practical preparation</li>
+        <li>Exam preparation</li>
+      </ul>
+
+      <p>More diploma learning resources coming soon!</p>
+    </div>
+  `;
+}
 </script>
 
 </body>
