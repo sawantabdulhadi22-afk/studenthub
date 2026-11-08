@@ -2042,3 +2042,730 @@ async function boot() {
 }
 
 boot();
+
+/* =========================================================
+   23. ADMIN PYQ MANAGER
+   Create papers, questions and exam-format solutions
+   ========================================================= */
+
+let selectedPYQPaperId = null;
+
+function renderAdminPYQManager() {
+  const page = $("page-admin");
+
+  if (!page || currentProfile?.role !== "admin") return;
+
+  let panel = $("adminPYQManager");
+
+  if (!panel) {
+    panel = document.createElement("section");
+    panel.id = "adminPYQManager";
+    panel.className = "panel";
+    page.appendChild(panel);
+  }
+
+  panel.innerHTML = `
+    <div style="margin-bottom:24px">
+      <h2>PYQ & Examination Manager</h2>
+      <p class="muted">
+        Create previous-year papers and practice examinations
+        for all branches and semesters.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h3>Create New Paper</h3>
+
+      <form id="pyqPaperForm">
+
+        <label>Course</label>
+        <input id="pyqCourse" value="MSBTE Diploma" required>
+
+        <label>Board</label>
+        <input id="pyqBoard" value="MSBTE" required>
+
+        <label>Scheme</label>
+        <input id="pyqScheme" value="K Scheme">
+
+        <label>Branch</label>
+        <input
+          id="pyqBranch"
+          list="pyqBranchOptions"
+          placeholder="Select or type branch"
+          required
+        >
+
+        <datalist id="pyqBranchOptions">
+          <option value="Mechanical Engineering">
+          <option value="Civil Engineering">
+          <option value="Computer Engineering">
+          <option value="Information Technology">
+          <option value="Electrical Engineering">
+          <option value="Automobile Engineering">
+          <option value="Electronics Engineering">
+          <option value="Food Technology">
+          <option value="Chemical Engineering">
+          <option value="Production Engineering">
+          <option value="Instrumentation Engineering">
+          <option value="All Branches">
+        </datalist>
+
+        <label>Semester</label>
+        <select id="pyqTerm" required>
+          <option value="">Select semester</option>
+          ${[1,2,3,4,5,6].map(n =>
+            `<option value="Semester ${n}">Semester ${n}</option>`
+          ).join("")}
+        </select>
+
+        <label>Subject name with subject code</label>
+        <input
+          id="pyqSubject"
+          placeholder="e.g. Manufacturing Technology (312313)"
+          required
+        >
+
+        <label>Paper type</label>
+        <select id="pyqType" required>
+          <option value="PYQ">Previous Year Question Paper</option>
+          <option value="Practice">Practice Paper</option>
+        </select>
+
+        <label>Paper format</label>
+        <select id="pyqFormat" required>
+          <option value="">Select marks</option>
+          <option value="20">20 Marks - Short Test</option>
+          <option value="30">30 Marks - Unit Test</option>
+          <option value="70">70 Marks - Final Exam</option>
+        </select>
+
+        <label>Paper title</label>
+        <input
+          id="pyqTitle"
+          placeholder="e.g. Manufacturing Technology Final Paper 1"
+          required
+        >
+
+        <label>Exam year (PYQ only)</label>
+        <input id="pyqYear" type="number" min="2000" max="2100">
+
+        <label>Duration in minutes</label>
+        <input id="pyqDuration" type="number" min="1" value="60" required>
+
+        <label>Instructions</label>
+        <textarea
+          id="pyqInstructions"
+          rows="4"
+          placeholder="Enter examination instructions..."
+        ></textarea>
+
+        <button type="submit" class="small-btn" id="pyqCreateButton">
+          Create Paper
+        </button>
+
+        <p id="pyqPaperStatus" class="muted"></p>
+      </form>
+    </div>
+
+    <div class="panel" style="margin-top:20px">
+      <h3>Add Questions and Solutions</h3>
+
+      <label>Select paper</label>
+      <select id="pyqQuestionPaper">
+        <option value="">Select a paper first</option>
+      </select>
+
+      <div id="pyqQuestionArea" class="hidden">
+
+        <p id="pyqSelectedPaperInfo" class="muted"></p>
+
+        <form id="pyqQuestionForm">
+
+          <label>Question number</label>
+          <input id="pyqQuestionNumber" type="number" min="1" required>
+
+          <label>Section (optional)</label>
+          <input id="pyqSection" placeholder="e.g. Section A">
+
+          <label>Question type</label>
+          <select id="pyqQuestionType" required>
+            <option value="short">Short answer</option>
+            <option value="long">Long answer</option>
+            <option value="mcq">MCQ</option>
+            <option value="numerical">Numerical</option>
+            <option value="diagram">Diagram-based</option>
+          </select>
+
+          <label>Question</label>
+          <textarea
+            id="pyqQuestionText"
+            rows="4"
+            placeholder="Write the complete question..."
+            required
+          ></textarea>
+
+          <label>Marks</label>
+          <input
+            id="pyqQuestionMarks"
+            type="number"
+            min="0.5"
+            step="0.5"
+            required
+          >
+
+          <div id="pyqMCQFields" class="hidden">
+            <label>MCQ options (one per line)</label>
+            <textarea
+              id="pyqOptions"
+              rows="5"
+              placeholder="A. Option one&#10;B. Option two&#10;C. Option three&#10;D. Option four"
+            ></textarea>
+
+            <label>Correct option</label>
+            <input id="pyqCorrectOption" placeholder="e.g. B">
+          </div>
+
+          <label>Complete exam-format answer / solution</label>
+          <textarea
+            id="pyqSolution"
+            rows="10"
+            placeholder="Write the proper answer, explanation, steps, formulas and conclusion..."
+            required
+          ></textarea>
+
+          <label>Marking scheme (optional)</label>
+          <textarea
+            id="pyqMarkingScheme"
+            rows="4"
+            placeholder="Example: Formula - 1 mark; calculation - 2 marks; answer with unit - 1 mark."
+          ></textarea>
+
+          <button type="submit" class="small-btn" id="pyqAddQuestionButton">
+            Save Question and Answer
+          </button>
+
+          <p id="pyqQuestionStatus" class="muted"></p>
+        </form>
+
+        <div id="pyqQuestionList" style="margin-top:20px"></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:20px">
+      <h3>Created Papers</h3>
+      <div id="pyqPaperList">Loading papers...</div>
+    </div>
+  `;
+
+  $("pyqPaperForm").onsubmit = createPYQPaper;
+  $("pyqQuestionForm").onsubmit = addPYQQuestion;
+
+  $("pyqQuestionPaper").onchange = async () => {
+    selectedPYQPaperId = $("pyqQuestionPaper").value || null;
+
+    $("pyqQuestionArea").classList.toggle(
+      "hidden",
+      !selectedPYQPaperId
+    );
+
+    if (selectedPYQPaperId) {
+      await loadPYQQuestions();
+    }
+  };
+
+  $("pyqQuestionType").onchange = () => {
+    $("pyqMCQFields").classList.toggle(
+      "hidden",
+      $("pyqQuestionType").value !== "mcq"
+    );
+  };
+
+  loadAdminPapers();
+}
+
+
+/* CREATE PAPER */
+
+async function createPYQPaper(event) {
+  event.preventDefault();
+
+  if (currentProfile?.role !== "admin") {
+    return toast("Admin access only.");
+  }
+
+  const format = Number($("pyqFormat").value);
+  const year = $("pyqYear").value;
+
+  if (![20, 30, 70].includes(format)) {
+    return toast("Select a valid paper format.");
+  }
+
+  const paper = {
+    course: $("pyqCourse").value.trim(),
+    board: $("pyqBoard").value.trim(),
+    scheme: $("pyqScheme").value.trim() || null,
+    branch: $("pyqBranch").value.trim(),
+    term: $("pyqTerm").value,
+    subject: $("pyqSubject").value.trim(),
+    paper_type: $("pyqType").value,
+    paper_format: format,
+    title: $("pyqTitle").value.trim(),
+    exam_year: year ? Number(year) : null,
+    duration_minutes: Number($("pyqDuration").value),
+    max_marks: format,
+    instructions: $("pyqInstructions").value.trim() || null,
+    is_published: false,
+    created_by: currentUser.id
+  };
+
+  if (
+    !paper.course ||
+    !paper.branch ||
+    !paper.subject ||
+    !paper.title ||
+    !paper.duration_minutes
+  ) {
+    return toast("Complete all required paper details.");
+  }
+
+  if (paper.paper_type === "PYQ" && !paper.exam_year) {
+    return toast("Enter the examination year for a PYQ.");
+  }
+
+  const button = $("pyqCreateButton");
+  button.disabled = true;
+  button.textContent = "Creating...";
+
+  try {
+    const { data, error } = await sb
+      .from("exam_papers")
+      .insert(paper)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    toast("Paper created successfully.");
+
+    $("pyqPaperForm").reset();
+    $("pyqCourse").value = "MSBTE Diploma";
+    $("pyqBoard").value = "MSBTE";
+    $("pyqScheme").value = "K Scheme";
+    $("pyqDuration").value = 60;
+
+    await loadAdminPapers();
+
+    if (data?.id) {
+      $("pyqQuestionPaper").value = data.id;
+      selectedPYQPaperId = data.id;
+      $("pyqQuestionArea").classList.remove("hidden");
+      await loadPYQQuestions();
+    }
+
+  } catch (error) {
+    console.error(error);
+    $("pyqPaperStatus").textContent = error.message;
+    toast("Could not create paper: " + error.message);
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "Create Paper";
+  }
+}
+
+
+/* LOAD ADMIN PAPERS */
+
+async function loadAdminPapers() {
+  if (!sb || currentProfile?.role !== "admin") return;
+
+  const list = $("pyqPaperList");
+  const selector = $("pyqQuestionPaper");
+
+  if (!list || !selector) return;
+
+  list.textContent = "Loading papers...";
+
+  const { data, error } = await sb
+    .from("exam_papers")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    list.textContent = "Unable to load papers: " + error.message;
+    return;
+  }
+
+  if (!data?.length) {
+    list.innerHTML = `<p class="muted">No examination papers created yet.</p>`;
+    selector.innerHTML = `<option value="">No papers available</option>`;
+    return;
+  }
+
+  const previousSelection = selectedPYQPaperId;
+
+  selector.innerHTML = `
+    <option value="">Select a paper</option>
+    ${data.map(paper => `
+      <option value="${safeText(paper.id)}">
+        ${safeText(paper.title)} · ${safeText(paper.branch)}
+        · ${safeText(paper.term)}
+      </option>
+    `).join("")}
+  `;
+
+  if (previousSelection && data.some(p => p.id === previousSelection)) {
+    selector.value = previousSelection;
+  }
+
+  list.innerHTML = data.map(paper => `
+    <article class="resource-card" style="margin-bottom:12px">
+      <h3>${safeText(paper.title)}</h3>
+
+      <p>
+        ${safeText(paper.branch)} ·
+        ${safeText(paper.term)} ·
+        ${safeText(paper.subject)}
+      </p>
+
+      <p class="muted">
+        ${safeText(paper.paper_type)} ·
+        ${paper.paper_format} marks ·
+        ${paper.duration_minutes} minutes
+        ${paper.exam_year ? " · " + paper.exam_year : ""}
+      </p>
+
+      <p>
+        Status:
+        <b>${paper.is_published ? "Published" : "Draft"}</b>
+      </p>
+
+      <div class="resource-actions">
+        <button
+          class="small-btn"
+          data-manage-pyq="${safeText(paper.id)}"
+        >Add Questions</button>
+
+        <button
+          class="small-btn"
+          data-publish-pyq="${safeText(paper.id)}"
+        >${paper.is_published ? "Unpublish" : "Publish"}</button>
+
+        <button
+          class="small-btn"
+          data-delete-pyq="${safeText(paper.id)}"
+        >Delete</button>
+      </div>
+    </article>
+  `).join("");
+
+  list.querySelectorAll("[data-manage-pyq]").forEach(button => {
+    button.onclick = async () => {
+      selectedPYQPaperId = button.dataset.managePyq;
+      selector.value = selectedPYQPaperId;
+      $("pyqQuestionArea").classList.remove("hidden");
+
+      await loadPYQQuestions();
+
+      $("pyqQuestionArea").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    };
+  });
+
+  list.querySelectorAll("[data-publish-pyq]").forEach(button => {
+    button.onclick = async () => {
+      await togglePYQPublication(button.dataset.publishPyq, data);
+    };
+  });
+
+  list.querySelectorAll("[data-delete-pyq]").forEach(button => {
+    button.onclick = async () => {
+      const paper = data.find(p => p.id === button.dataset.deletePyq);
+
+      if (!paper) return;
+
+      if (!confirm(
+        "Delete this paper and all its questions and solutions permanently?"
+      )) return;
+
+      const { error } = await sb
+        .from("exam_papers")
+        .delete()
+        .eq("id", paper.id);
+
+      if (error) return toast(error.message);
+
+      if (selectedPYQPaperId === paper.id) {
+        selectedPYQPaperId = null;
+      }
+
+      toast("Paper deleted.");
+      await loadAdminPapers();
+    };
+  });
+}
+
+
+/* PUBLISH / UNPUBLISH PAPER */
+
+async function togglePYQPublication(paperId, papers) {
+  const paper = papers.find(p => p.id === paperId);
+  if (!paper) return;
+
+  if (!paper.is_published) {
+    const { data: questions, error: questionError } = await sb
+      .from("exam_questions")
+      .select("id,marks")
+      .eq("paper_id", paperId);
+
+    if (questionError) return toast(questionError.message);
+
+    if (!questions?.length) {
+      return toast("Add questions before publishing.");
+    }
+
+    const total = questions.reduce(
+      (sum, question) => sum + Number(question.marks || 0),
+      0
+    );
+
+    if (Math.abs(total - Number(paper.max_marks)) > 0.001) {
+      return toast(
+        `Question marks total ${total}, but this paper requires ${paper.max_marks}.`
+      );
+    }
+
+    const { data: solutions, error: solutionError } = await sb
+      .from("exam_solutions")
+      .select("question_id")
+      .in("question_id", questions.map(q => q.id));
+
+    if (solutionError) return toast(solutionError.message);
+
+    if (solutions?.length !== questions.length) {
+      return toast("Add a solution for every question before publishing.");
+    }
+  }
+
+  const { error } = await sb
+    .from("exam_papers")
+    .update({ is_published: !paper.is_published })
+    .eq("id", paperId);
+
+  if (error) return toast(error.message);
+
+  toast(paper.is_published ? "Paper unpublished." : "Paper published.");
+  await loadAdminPapers();
+}
+
+
+/* ADD QUESTION AND SOLUTION */
+
+async function addPYQQuestion(event) {
+  event.preventDefault();
+
+  if (currentProfile?.role !== "admin") {
+    return toast("Admin access only.");
+  }
+
+  if (!selectedPYQPaperId) {
+    return toast("Select a paper first.");
+  }
+
+  const paperButton = $("pyqQuestionPaper");
+  const selectedPaper = paperButton.selectedOptions[0]?.textContent || "";
+
+  const questionNumber = Number($("pyqQuestionNumber").value);
+  const marks = Number($("pyqQuestionMarks").value);
+  const questionType = $("pyqQuestionType").value;
+  const questionText = $("pyqQuestionText").value.trim();
+  const solutionText = $("pyqSolution").value.trim();
+
+  if (
+    !Number.isInteger(questionNumber) ||
+    questionNumber < 1 ||
+    !Number.isFinite(marks) ||
+    marks <= 0 ||
+    !questionText ||
+    !solutionText
+  ) {
+    return toast("Enter a valid question, marks and complete solution.");
+  }
+
+  let options = null;
+  let correctOption = null;
+
+  if (questionType === "mcq") {
+    options = $("pyqOptions").value
+      .split("\n")
+      .map(line => line.trim())
+      .filter(Boolean);
+
+    correctOption = $("pyqCorrectOption").value.trim();
+
+    if (options.length < 2 || !correctOption) {
+      return toast("Enter MCQ options and the correct option.");
+    }
+  }
+
+  const button = $("pyqAddQuestionButton");
+  button.disabled = true;
+  button.textContent = "Saving...";
+
+  try {
+    const { data: question, error: questionError } = await sb
+      .from("exam_questions")
+      .insert({
+        paper_id: selectedPYQPaperId,
+        question_number: questionNumber,
+        section: $("pyqSection").value.trim() || null,
+        question_text: questionText,
+        question_type: questionType,
+        marks,
+        options
+      })
+      .select()
+      .single();
+
+    if (questionError) throw questionError;
+
+    const markingText = $("pyqMarkingScheme").value.trim();
+
+    const { error: solutionError } = await sb
+      .from("exam_solutions")
+      .insert({
+        question_id: question.id,
+        solution_text: solutionText,
+        correct_option: correctOption,
+        marking_scheme: markingText
+          ? { instructions: markingText }
+          : null
+      });
+
+    if (solutionError) {
+      console.error(solutionError);
+      toast(
+        "Question saved, but solution failed. Check the solution table before retrying."
+      );
+      return;
+    }
+
+    toast("Question and solution saved.");
+
+    $("pyqQuestionForm").reset();
+    $("pyqMCQFields").classList.add("hidden");
+
+    await loadPYQQuestions();
+
+  } catch (error) {
+    console.error(error);
+    $("pyqQuestionStatus").textContent = error.message;
+    toast("Could not save question: " + error.message);
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "Save Question and Answer";
+  }
+}
+
+
+/* VIEW QUESTIONS IN ADMIN */
+
+async function loadPYQQuestions() {
+  if (!selectedPYQPaperId) return;
+
+  const list = $("pyqQuestionList");
+  if (!list) return;
+
+  list.textContent = "Loading questions...";
+
+  const { data: paper, error: paperError } = await sb
+    .from("exam_papers")
+    .select("title,max_marks,paper_format")
+    .eq("id", selectedPYQPaperId)
+    .single();
+
+  if (paperError) {
+    list.textContent = paperError.message;
+    return;
+  }
+
+  $("pyqSelectedPaperInfo").textContent =
+    `${paper.title} · ${paper.max_marks} marks`;
+
+  const { data, error } = await sb
+    .from("exam_questions")
+    .select("id,question_number,question_text,question_type,marks,section")
+    .eq("paper_id", selectedPYQPaperId)
+    .order("question_number", { ascending: true });
+
+  if (error) {
+    list.textContent = error.message;
+    return;
+  }
+
+  if (!data?.length) {
+    list.innerHTML = `<p class="muted">No questions added yet.</p>`;
+    return;
+  }
+
+  const total = data.reduce(
+    (sum, question) => sum + Number(question.marks),
+    0
+  );
+
+  list.innerHTML = `
+    <h3>Questions added: ${data.length}</h3>
+    <p class="muted">
+      Marks added: ${total} / ${paper.max_marks}
+    </p>
+
+    ${data.map(question => `
+      <article class="resource-card" style="margin-bottom:10px">
+        <b>Q${question.question_number} · ${question.marks} marks</b>
+        <p>${safeText(question.question_text)}</p>
+        <p class="muted">
+          ${safeText(question.question_type)}
+          ${question.section ? " · " + safeText(question.section) : ""}
+        </p>
+        <button
+          class="small-btn"
+          data-delete-pyq-question="${safeText(question.id)}"
+        >Delete question</button>
+      </article>
+    `).join("")}
+  `;
+
+  list.querySelectorAll("[data-delete-pyq-question]").forEach(button => {
+    button.onclick = async () => {
+      if (!confirm("Delete this question and its solution?")) return;
+
+      const { error } = await sb
+        .from("exam_questions")
+        .delete()
+        .eq("id", button.dataset.deletePyqQuestion);
+
+      if (error) return toast(error.message);
+
+      toast("Question deleted.");
+      await loadPYQQuestions();
+    };
+  });
+}
+
+
+/* 24. INITIALIZE PYQ MANAGER */
+
+/* Add this function call inside navigate(page), after:
+   if (page === "admin") loadAdminResources();
+*/
+
+function openAdminPYQManager() {
+  if (currentProfile?.role !== "admin") {
+    return toast("Admin access only.");
+  }
+
+  renderAdminPYQManager();
+}
