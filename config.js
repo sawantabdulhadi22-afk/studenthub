@@ -5,6 +5,6 @@
   NEVER put a Supabase secret/service_role key or AI API key in this file.
 */
 window.STUDENTHUB_CONFIG = {
-  SUPABASE_URL: "https://zxcgxcfraszyarekkycd.supabase.co/rest/v1/",
+  SUPABASE_URL: "https://zxcgxcfraszyarekkycd.supabase.co",
   SUPABASE_PUBLISHABLE_KEY: "sb_publishable_XLXqwsYqDvz38UEg-mGKog_euu3DZuj"
 };
