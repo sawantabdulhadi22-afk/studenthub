@@ -3,197 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#315efb">
 <title>StudentHub | Study Smarter</title>
 
 <style>
 :root {
-  --blue:#315efb;
-  --dark:#172554;
-  --bg:#f4f6fc;
-  --white:#fff;
-  --muted:#64748b;
-  --border:#e2e8f0;
-  --green:#15803d;
+  --bg:#080d19;
+  --panel:#111b2e;
+  --panel2:#17243a;
+  --gold:#e8bd65;
+  --gold2:#ffdc91;
+  --text:#f5f7fc;
+  --muted:#a5b2c8;
+  --border:#293954;
+  --blue:#5d8cff;
 }
 * { box-sizing:border-box; }
 body {
   margin:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial, sans-serif;
   background:var(--bg);
-  color:var(--dark);
+  color:var(--text);
 }
 header {
-  background:white;
-  padding:15px 5%;
+  padding:22px 6%;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 2px 12px #0000000b;
-}
-.logo { font-size:24px;font-weight:bold; }
-.logo span { color:var(--blue); }
-nav { display:flex;gap:15px;flex-wrap:wrap; }
-nav a {
-  color:var(--dark);
-  text-decoration:none;
-  font-size:14px;
-  font-weight:bold;
-}
-nav a:hover { color:var(--blue); }
-.hero {
-  max-width:1150px;
-  margin:25px auto;
-  padding:45px 6%;
-  border-radius:22px;
-  background:linear-gradient(120deg,#dce7ff,#f2f5ff);
-}
-.hero h1 { font-size:clamp(30px,5vw,48px);margin:0 0 12px; }
-.hero p { color:var(--muted);line-height:1.6; }
-main { max-width:1150px;margin:auto;padding:10px 18px 45px; }
-section { scroll-margin-top:90px; }
-.card {
-  background:white;
-  border-radius:16px;
-  padding:20px;
-  box-shadow:0 4px 15px #00000008;
-  margin-bottom:18px;
-}
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:16px;
-}
-.stats {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:12px;
-  margin:20px 0;
-}
-.stat {
-  background:white;
-  border-radius:14px;
-  padding:18px;
-}
-.stat strong {
-  display:block;
-  color:var(--blue);
-  font-size:27px;
-  margin-top:8px;
-}
-h2,h3 { line-height:1.3; }
-p { line-height:1.5; }
-.muted,.small { color:var(--muted); }
-.small { font-size:12px; }
-label {
-  display:block;
-  font-weight:bold;
-  font-size:14px;
-  margin:12px 0 5px;
-}
-input,select,textarea {
-  width:100%;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  margin:5px 0 10px;
-  background:white;
-  color:var(--dark);
-  font-size:15px;
-}
-button,.button {
-  display:inline-block;
-  background:var(--blue);
-  color:white;
-  border:0;
-  border-radius:9px;
-  padding:11px 16px;
-  cursor:pointer;
-  font-weight:bold;
-  text-decoration:none;
-  margin:4px 3px 4px 0;
-}
-button:hover,.button:hover { opacity:.88; }
-.secondary { background:#e8edff;color:#2445b8; }
-.danger { background:#fee2e2;color:#b91c1c; }
-.green { background:#dcfce7;color:#166534; }
-.tabs {
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin:15px 0;
-}
-.tab.active { background:var(--dark); }
-.resource-item {
-  padding:13px;
+  justify-content:space-between;
   border-bottom:1px solid var(--border);
+  background:#0b1322;
+}
+.logo {
+  color:var(--gold);
+  font-size:25px;
+  font-weight:800;
+}
+.logo span { color:white; }
+.header-tag {
+  color:var(--muted);
+  font-size:12px;
+}
+.hero {
+  padding:45px 6% 25px;
+  text-align:center;
+}
+.hero h1 {
+  font-size:clamp(30px,5vw,48px);
+  margin:0 0 12px;
+}
+.hero h1 span { color:var(--gold); }
+.hero p {
+  color:var(--muted);
   line-height:1.6;
 }
-.resource-item:last-child { border-bottom:0; }
-.resource-box {
-  background:#f8faff;
+.container {
+  width:90%;
+  max-width:1100px;
+  margin:25px auto 60px;
+}
+.card {
+  background:linear-gradient(145deg,var(--panel),#0e1728);
   border:1px solid var(--border);
-  padding:15px;
-  border-radius:12px;
-  margin:12px 0;
+  border-radius:18px;
+  padding:24px;
+  margin-bottom:22px;
+  box-shadow:0 12px 35px #0003;
 }
-.answer {
-  background:#f0fdf4;
+.card h2 {
+  margin:0 0 8px;
+  color:var(--gold);
+  font-size:21px;
+}
+.subheading {
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:22px;
+}
+.form-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.field label {
+  display:block;
+  font-size:13px;
+  color:#d8e1f1;
+  margin-bottom:8px;
+  font-weight:600;
+}
+select, input, textarea {
+  width:100%;
+  min-height:47px;
+  border:1px solid var(--border);
+  border-radius:10px;
   padding:12px;
-  border-radius:9px;
-  margin-top:10px;
-  white-space:pre-line;
+  background:#0a1425;
+  color:white;
+  font-size:14px;
+  outline:none;
+  appearance:auto;
+  pointer-events:auto;
 }
-.hidden { display:none!important; }
-.task {
-  display:flex;
-  align-items:center;
-  gap:9px;
-  padding:10px 0;
-  border-bottom:1px solid var(--border);
+select:focus, input:focus, textarea:focus {
+  border-color:var(--gold);
 }
-.task span { flex:1;overflow-wrap:anywhere; }
-.task.done span { text-decoration:line-through;color:#999; }
-.task input { width:auto;margin:0; }
-.flashcard {
-  background:#eef2ff;
-  border-radius:12px;
-  padding:25px;
-  text-align:center;
-  min-height:120px;
-  margin:12px 0;
-}
-.premium {
-  background:#172554;
+select option {
+  background:#101b2d;
   color:white;
 }
-.premium p { color:#cbd5e1; }
+.full { grid-column:1/-1; }
+button {
+  border:0;
+  border-radius:10px;
+  padding:13px 19px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.primary {
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#111827;
+}
+.secondary {
+  background:#20304b;
+  color:white;
+  border:1px solid var(--border);
+}
+button:hover { opacity:.9; }
+.actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+.status {
+  color:var(--muted);
+  font-size:13px;
+  margin-top:12px;
+}
+.resource-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:13px;
+}
+.resource {
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:18px;
+  min-height:110px;
+}
+.resource h3 {
+  font-size:15px;
+  margin:0 0 9px;
+  color:var(--gold);
+}
+.resource p {
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+.resource button {
+  margin-top:8px;
+  padding:9px 12px;
+  font-size:12px;
+}
+#result {
+  line-height:1.7;
+  color:#dce5f4;
+}
+.notice {
+  border-left:3px solid var(--gold);
+  background:#17243a;
+  padding:12px 15px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+  border-radius:5px;
+  margin-top:17px;
+}
 footer {
   text-align:center;
   padding:25px;
+  border-top:1px solid var(--border);
   color:var(--muted);
-}
-.badge {
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
-  background:#e8edff;
-  color:#2445b8;
   font-size:12px;
-  font-weight:bold;
 }
-.result-good { color:var(--green);font-weight:bold; }
-@media(max-width:600px) {
-  header { justify-content:center; }
-  nav { justify-content:center; }
-  .hero { margin:14px;padding:30px 22px; }
-  main { padding:10px 12px 35px; }
-  .card { padding:16px; }
+.hidden { display:none !important; }
+
+@media(max-width:650px) {
+  header { padding:18px 5%; }
+  .header-tag { display:none; }
+  .container { width:92%; }
+  .card { padding:18px; }
+  .form-grid { grid-template-columns:1fr; }
+  .full { grid-column:auto; }
+  .resource-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:390px) {
+  .resource-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -201,375 +208,573 @@ footer {
 <body>
 
 <header>
-  <div class="logo">🎓 Student<span>Hub</span></div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#courses">Courses</a>
-    <a href="#planner">Planner</a>
-    <a href="#flashcards">Flashcards</a>
-    <a href="#premium">Premium</a>
-  </nav>
+  <div class="logo">Student<span>Hub.</span></div>
+  <div class="header-tag">YOUR SMART LEARNING COMPANION</div>
 </header>
 
-<section class="hero" id="home">
-  <h1>Study smarter. Achieve more.</h1>
-  <p>Your all-in-one learning platform for Diploma, Class 11, Class 12, B.Tech and ITI students.</p>
-  <button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">
-    Explore Courses →
-  </button>
+<section class="hero">
+  <h1>Study Smarter with <span>StudentHub</span></h1>
+  <p>Select your course, education board, class and subjects.<br>
+  Find your learning resources in one place.</p>
 </section>
 
-<main>
+<main class="container">
 
-<!-- DASHBOARD -->
-<section>
-  <h2>📊 Your Dashboard</h2>
-  <p class="muted">Track your daily study progress.</p>
-  <div class="stats">
-    <div class="stat">Total Tasks<strong id="totalTasks">0</strong></div>
-    <div class="stat">Completed<strong id="completedTasks">0</strong></div>
-    <div class="stat">Remaining<strong id="remainingTasks">0</strong></div>
-  </div>
-</section>
-
-<!-- COURSES -->
-<section class="card" id="courses">
-  <h2>🎓 Explore Courses</h2>
-  <p class="muted">Choose your course and find study resources.</p>
-
-  <label>Choose Course</label>
-  <select id="course" onchange="updateCourseOptions()">
-    <option value="Diploma Engineering">Diploma Engineering</option>
-    <option value="Class 11">Class 11</option>
-    <option value="Class 12">Class 12</option>
-    <option value="B.Tech">B.Tech</option>
-    <option value="ITI">ITI</option>
-  </select>
-
-  <div id="boardField">
-    <label>Education Board</label>
-    <select id="board">
-      <option value="MSBTE Maharashtra">MSBTE Maharashtra</option>
-      <option value="BTEUP Uttar Pradesh">BTEUP Uttar Pradesh</option>
-      <option value="DTE Karnataka">DTE Karnataka</option>
-      <option value="TNDOTE Tamil Nadu">TNDOTE Tamil Nadu</option>
-      <option value="WBSCTE West Bengal">WBSCTE West Bengal</option>
-      <option value="SBTE Bihar">SBTE Bihar</option>
-    </select>
-  </div>
-
-  <div id="branchField">
-    <label>Branch / Stream</label>
-    <select id="branch" onchange="updateSubjects()"></select>
-  </div>
-
-  <div id="schemeField">
-    <label>Scheme</label>
-    <select id="scheme">
-      <option value="K Scheme">K Scheme</option>
-      <option value="I Scheme">I Scheme</option>
-      <option value="Other / Not applicable">Other / Not applicable</option>
-    </select>
-  </div>
-
-  <div id="semesterField">
-    <label>Semester / Class / Year</label>
-    <select id="semester" onchange="updateSubjects()"></select>
-  </div>
-
-  <label>Select Subject</label>
-  <select id="subject"></select>
-
-  <button onclick="openResources()">Explore Learning Resources →</button>
-  <div id="courseMessage" class="small"></div>
-</section>
-
-<!-- LEARNING RESOURCES -->
-<section class="card hidden" id="resources">
-  <h2>📚 Learning Resources</h2>
-  <p id="resourceHeading" class="muted"></p>
-
-  <input id="resourceSearch" placeholder="Search notes, questions or topics..." oninput="filterResources()">
-
-  <div class="tabs">
-    <button class="tab active" onclick="showTab('notes',this)">📖 Notes</button>
-    <button class="tab" onclick="showTab('important',this)">⭐ Important Questions</button>
-    <button class="tab" onclick="showTab('diagrams',this)">✏️ Diagrams</button>
-    <button class="tab" onclick="showTab('formulas',this)">📐 Formulas</button>
-    <button class="tab" onclick="showTab('videos',this)">🎥 Videos</button>
-    <button class="tab" onclick="showTab('mcq',this)">🧠 MCQ Test</button>
-    <button class="tab" onclick="showTab('papers',this)">📄 Papers</button>
-  </div>
-
-  <div id="resourceContent"></div>
-</section>
-
-<!-- PLANNER -->
-<section class="card" id="planner">
-  <h2>📅 Study Planner</h2>
-  <p class="muted">Add tasks and track your progress. Tasks are saved in this browser.</p>
-  <input id="taskInput" placeholder="Example: Study Mathematics chapter 2">
-  <button onclick="addTask()">Add Task +</button>
-  <div id="taskList"></div>
-</section>
-
-<!-- FLASHCARDS -->
-<section class="card" id="flashcards">
-  <h2>🎯 Flashcards</h2>
-  <p class="muted">Quickly revise basic concepts.</p>
-  <div class="flashcard">
-    <h3 id="flashQuestion">What is HTML?</h3>
-    <p id="flashAnswer" hidden>HTML is the standard markup language used to structure web pages.</p>
-  </div>
-  <button onclick="showFlashAnswer()">Show Answer</button>
-  <button onclick="nextFlashcard()">Next Question →</button>
-</section>
-
-<!-- FREE RESOURCES -->
 <section class="card">
-  <h2>🌐 Free Learning Websites</h2>
-  <div class="grid">
-    <div class="resource-box">
-      <h3>Khan Academy</h3>
-      <p>Maths, science and other subjects.</p>
-      <a href="https://www.khanacademy.org/" target="_blank" rel="noopener">Visit website →</a>
+  <h2>🎓 Choose Your Education</h2>
+  <p class="subheading">Your options will update automatically based on your selections.</p>
+
+  <div class="form-grid">
+
+    <div class="field">
+      <label for="course">Select Course</label>
+      <select id="course">
+        <option value="">Select Course</option>
+        <option value="diploma">Diploma Engineering</option>
+        <option value="school11">Class 11</option>
+        <option value="school12">Class 12</option>
+        <option value="btech">B.Tech</option>
+        <option value="iti">ITI</option>
+      </select>
     </div>
-    <div class="resource-box">
-      <h3>OpenStax</h3>
-      <p>Free educational textbooks.</p>
-      <a href="https://openstax.org/" target="_blank" rel="noopener">Visit website →</a>
+
+    <div class="field">
+      <label for="board" id="boardLabel">Select Education Board</label>
+      <select id="board">
+        <option value="">Select Board</option>
+      </select>
     </div>
-    <div class="resource-box">
-      <h3>GeoGebra</h3>
-      <p>Interactive mathematics learning.</p>
-      <a href="https://www.geogebra.org/" target="_blank" rel="noopener">Visit website →</a>
+
+    <div class="field" id="schemeField">
+      <label for="scheme">Select Scheme</label>
+      <select id="scheme">
+        <option value="">Select Scheme</option>
+        <option value="K Scheme">K Scheme</option>
+        <option value="I Scheme">I Scheme</option>
+      </select>
     </div>
-    <div class="resource-box">
-      <h3>NPTEL</h3>
-      <p>Engineering and university lectures.</p>
-      <a href="https://nptel.ac.in/" target="_blank" rel="noopener">Visit website →</a>
+
+    <div class="field">
+      <label for="branch" id="branchLabel">Select Branch / Stream</label>
+      <select id="branch">
+        <option value="">Select Branch / Stream</option>
+      </select>
     </div>
-    <div class="resource-box">
-      <h3>SWAYAM</h3>
-      <p>Online courses and learning materials.</p>
-      <a href="https://swayam.gov.in/" target="_blank" rel="noopener">Visit website →</a>
+
+    <div class="field">
+      <label for="semester" id="semesterLabel">Select Semester / Year</label>
+      <select id="semester">
+        <option value="">Select Semester / Year</option>
+      </select>
     </div>
-    <div class="resource-box">
-      <h3>DIKSHA</h3>
-      <p>School education resources.</p>
-      <a href="https://diksha.gov.in/" target="_blank" rel="noopener">Visit website →</a>
+
+    <div class="field">
+      <label for="subject">Select Subject</label>
+      <select id="subject">
+        <option value="">Select Subject</option>
+      </select>
+    </div>
+
+    <div class="full">
+      <div class="actions">
+        <button class="primary" id="loadBtn" type="button">Explore My Study Hub →</button>
+        <button class="secondary" id="resetBtn" type="button">Reset Selection</button>
+      </div>
+      <div class="status" id="selectionStatus">Choose your course to get started.</div>
+    </div>
+
+  </div>
+
+  <div class="notice">
+    Note: Subject combinations and availability can vary by board, school,
+    university and institution. Confirm your final subject list with your
+    official syllabus.
+  </div>
+</section>
+
+<section class="card" id="studyHub">
+  <h2>📚 Your Learning Resources</h2>
+  <p class="subheading" id="resourceSubtitle">Select your education details to begin.</p>
+
+  <div class="resource-grid">
+    <div class="resource">
+      <h3>📖 Notes</h3>
+      <p>Chapter-wise study notes and explanations.</p>
+      <button class="secondary" onclick="showResource('Notes')">Open Notes</button>
+    </div>
+    <div class="resource">
+      <h3>⭐ Important Questions</h3>
+      <p>Practice important questions for revision.</p>
+      <button class="secondary" onclick="showResource('Important Questions')">Explore</button>
+    </div>
+    <div class="resource">
+      <h3>📝 Previous Papers</h3>
+      <p>Find previous examination papers and practice material.</p>
+      <button class="secondary" onclick="showResource('Previous Papers')">Explore</button>
+    </div>
+    <div class="resource">
+      <h3>📐 Diagrams</h3>
+      <p>Visual learning and subject diagrams.</p>
+      <button class="secondary" onclick="showResource('Diagrams')">View Diagrams</button>
+    </div>
+    <div class="resource">
+      <h3>🔢 Formulas</h3>
+      <p>Important formulas and quick revision.</p>
+      <button class="secondary" onclick="showResource('Formulas')">View Formulas</button>
+    </div>
+    <div class="resource">
+      <h3>🎯 MCQ Practice</h3>
+      <p>Test your understanding with multiple-choice questions.</p>
+      <button class="secondary" onclick="showResource('MCQ Practice')">Start Practice</button>
+    </div>
+    <div class="resource">
+      <h3>🎬 Video Learning</h3>
+      <p>Find video lessons for your selected subject.</p>
+      <button class="secondary" onclick="showResource('Video Learning')">Explore Videos</button>
+    </div>
+    <div class="resource">
+      <h3>🗓️ Study Planner</h3>
+      <p>Organise your study schedule.</p>
+      <button class="secondary" onclick="showResource('Study Planner')">Open Planner</button>
+    </div>
+    <div class="resource">
+      <h3>🧠 Flashcards</h3>
+      <p>Revise important concepts and definitions.</p>
+      <button class="secondary" onclick="showResource('Flashcards')">Open Flashcards</button>
     </div>
   </div>
 </section>
 
-<!-- PREMIUM -->
-<section class="card premium" id="premium">
-  <h2>⭐ StudentHub Premium</h2>
-  <p>Future premium features can include structured notes, extra practice tests and downloadable study packs.</p>
-  <h2>₹99 / month</h2>
-  <button onclick="alert('Premium subscriptions are a preview. Payments are not active.')">Explore Premium</button>
-  <p class="small">Preview only. No payment system is connected.</p>
+<section class="card">
+  <h2>📌 Selected Study Details</h2>
+  <div id="result">Your selected course and subject details will appear here.</div>
 </section>
 
 </main>
 
 <footer>
-  StudentHub © 2026 | Made for students worldwide 🌍
+  StudentHub © 2026 · Study Smarter, Achieve More
 </footer>
 
 <script>
-// =====================================
-// COURSE AND SUBJECT DATA
-// =====================================
+const course = document.getElementById("course");
+const board = document.getElementById("board");
+const branch = document.getElementById("branch");
+const semester = document.getElementById("semester");
+const subject = document.getElementById("subject");
+const scheme = document.getElementById("scheme");
 
-const courseData = {
-  "Diploma Engineering": {
-    branches: {
-      "Mechanical Engineering": {
-        "Semester 1": ["Basic Mathematics","Communication Skills","Engineering Graphics","Engineering Workshop Practice","Basic Science"],
-        "Semester 2": ["Applied Mathematics","Applied Science","Engineering Mechanics","Basic Electrical Engineering","Engineering Materials"],
-        "Semester 3": ["Strength of Materials","Fluid Mechanics and Machinery","Thermal Engineering","Production Drawing"],
-        "Semester 4": ["Theory of Machines","Manufacturing Processes","Metrology and Quality Control"],
-        "Semester 5": ["Design of Machine Elements","Industrial Engineering","Refrigeration and Air Conditioning"],
-        "Semester 6": ["Automobile Engineering","CAD/CAM","Production Management"]
-      },
-      "Civil Engineering": {
-        "Semester 1": ["Basic Mathematics","Communication Skills","Engineering Graphics","Basic Science"],
-        "Semester 2": ["Applied Mathematics","Applied Science","Engineering Mechanics"],
-        "Semester 3": ["Building Materials","Surveying","Strength of Materials"],
-        "Semester 4": ["Concrete Technology","Structural Mechanics","Hydraulics"],
-        "Semester 5": ["Design of Structures","Transportation Engineering","Environmental Engineering"],
-        "Semester 6": ["Estimating and Costing","Construction Management","Irrigation Engineering"]
-      },
-      "Computer Engineering": {
-        "Semester 1": ["Basic Mathematics","Communication Skills","Fundamentals of ICT"],
-        "Semester 2": ["Programming in C","Database Management","Digital Techniques"],
-        "Semester 3": ["Data Structures","Object Oriented Programming","Computer Networks"],
-        "Semester 4": ["Java Programming","Operating Systems","Software Engineering"],
-        "Semester 5": ["Web Development","Cyber Security","Cloud Computing"],
-        "Semester 6": ["Mobile Application Development","Advanced Java","Project Work"]
-      },
-      "Electrical Engineering": {
-        "Semester 1": ["Basic Mathematics","Communication Skills","Engineering Graphics"],
-        "Semester 2": ["Applied Science","Electrical Circuits","Electrical Measurements"],
-        "Semester 3": ["Electrical Machines","Electrical Power Generation","Electrical Materials"],
-        "Semester 4": ["Transformers","DC Machines","Electrical Installation"],
-        "Semester 5": ["Power Systems","Control Systems","Electrical Drives"],
-        "Semester 6": ["Switchgear and Protection","Renewable Energy","Industrial Automation"]
-      },
-      "Automobile Engineering": {
-        "Semester 1": ["Basic Mathematics","Communication Skills","Engineering Graphics"],
-        "Semester 2": ["Applied Science","Engineering Mechanics","Automobile Fundamentals"],
-        "Semester 3": ["Automobile Engines","Automobile Chassis","Vehicle Electrical Systems"],
-        "Semester 4": ["Automobile Transmission","Automobile Electrical Equipment","Vehicle Maintenance"],
-        "Semester 5": ["Automobile Design","Vehicle Testing","Pollution Control"],
-        "Semester 6": ["Automobile Technology","Automotive Electronics","Project Work"]
-      }
-    }
+const boardLabel = document.getElementById("boardLabel");
+const branchLabel = document.getElementById("branchLabel");
+const semesterLabel = document.getElementById("semesterLabel");
+const schemeField = document.getElementById("schemeField");
+const selectionStatus = document.getElementById("selectionStatus");
+const result = document.getElementById("result");
+const resourceSubtitle = document.getElementById("resourceSubtitle");
+
+const diplomaBoards = [
+  "MSBTE Maharashtra",
+  "BTEUP Uttar Pradesh",
+  "DTE Karnataka",
+  "TNDOTE Tamil Nadu",
+  "WBSCTE West Bengal"
+];
+
+const schoolBoards = [
+  "Maharashtra HSC",
+  "CBSE",
+  "ISC"
+];
+
+const btechUniversities = [
+  "Mumbai University",
+  "Savitribai Phule Pune University",
+  "Dr. A.P.J. Abdul Kalam Technical University",
+  "VTU Karnataka",
+  "Other University"
+];
+
+const branches = {
+  diploma: [
+    "Mechanical Engineering",
+    "Civil Engineering",
+    "Computer Engineering",
+    "Information Technology",
+    "Electrical Engineering",
+    "Electronics Engineering",
+    "Automobile Engineering",
+    "Chemical Engineering",
+    "Artificial Intelligence and Machine Learning"
+  ],
+  btech: [
+    "Computer Science Engineering",
+    "Information Technology",
+    "Mechanical Engineering",
+    "Civil Engineering",
+    "Electrical Engineering",
+    "Electronics and Telecommunication",
+    "Automobile Engineering",
+    "Artificial Intelligence and Data Science",
+    "Chemical Engineering",
+    "Aerospace Engineering"
+  ],
+  iti: [
+    "Electrician",
+    "Fitter",
+    "Welder",
+    "COPA",
+    "Mechanic Diesel",
+    "Mechanic Motor Vehicle",
+    "Turner",
+    "Machinist",
+    "Plumber",
+    "Draughtsman Mechanical",
+    "Electronics Mechanic"
+  ]
+};
+
+const diplomaSubjects = {
+  "Mechanical Engineering": [
+    "Strength of Materials",
+    "Fluid Mechanics and Machinery",
+    "Manufacturing Technology",
+    "Automobile Engineering",
+    "Thermal Engineering",
+    "Machine Design",
+    "Theory of Machines",
+    "Metrology and Quality Control",
+    "Engineering Drawing"
+  ],
+  "Civil Engineering": [
+    "Building Construction",
+    "Surveying",
+    "Strength of Materials",
+    "Concrete Technology",
+    "Transportation Engineering",
+    "Hydraulics",
+    "Environmental Engineering",
+    "Estimation and Costing"
+  ],
+  "Computer Engineering": [
+    "Programming in C",
+    "Data Structures",
+    "Database Management System",
+    "Computer Networks",
+    "Operating Systems",
+    "Web Development",
+    "Java Programming",
+    "Software Engineering"
+  ],
+  "Information Technology": [
+    "Programming in C",
+    "Database Management System",
+    "Web Technology",
+    "Computer Networks",
+    "Operating Systems",
+    "Python Programming",
+    "Cyber Security"
+  ],
+  "Electrical Engineering": [
+    "Basic Electrical Engineering",
+    "Electrical Machines",
+    "Power Systems",
+    "Electrical Measurements",
+    "Electrical Installation",
+    "Power Electronics"
+  ],
+  "Electronics Engineering": [
+    "Electronic Devices",
+    "Digital Electronics",
+    "Analog Circuits",
+    "Microcontrollers",
+    "Communication Systems",
+    "Electronic Measurements"
+  ],
+  "Automobile Engineering": [
+    "Automobile Engines",
+    "Vehicle Transmission",
+    "Automotive Electrical Systems",
+    "Vehicle Maintenance",
+    "Automobile Chassis",
+    "Vehicle Technology"
+  ],
+  "Chemical Engineering": [
+    "Chemical Process Principles",
+    "Chemical Technology",
+    "Fluid Flow",
+    "Heat Transfer",
+    "Mass Transfer"
+  ],
+  "Artificial Intelligence and Machine Learning": [
+    "Python Programming",
+    "Data Science",
+    "Machine Learning",
+    "Database Management",
+    "Artificial Intelligence",
+    "Statistics"
+  ]
+};
+
+const btechSubjects = {
+  "Computer Science Engineering": [
+    "Data Structures and Algorithms",
+    "Object Oriented Programming",
+    "Database Management Systems",
+    "Operating Systems",
+    "Computer Networks",
+    "Software Engineering",
+    "Artificial Intelligence"
+  ],
+  "Information Technology": [
+    "Data Structures",
+    "Web Technology",
+    "Database Systems",
+    "Computer Networks",
+    "Cloud Computing",
+    "Cyber Security"
+  ],
+  "Mechanical Engineering": [
+    "Engineering Mechanics",
+    "Strength of Materials",
+    "Thermodynamics",
+    "Fluid Mechanics",
+    "Manufacturing Processes",
+    "Machine Design"
+  ],
+  "Civil Engineering": [
+    "Engineering Mechanics",
+    "Structural Analysis",
+    "Geotechnical Engineering",
+    "Surveying",
+    "Concrete Technology",
+    "Transportation Engineering"
+  ],
+  "Electrical Engineering": [
+    "Circuit Theory",
+    "Electrical Machines",
+    "Power Systems",
+    "Control Systems",
+    "Power Electronics"
+  ],
+  "Electronics and Telecommunication": [
+    "Electronic Devices",
+    "Digital Electronics",
+    "Signals and Systems",
+    "Communication Systems",
+    "Microprocessors"
+  ],
+  "Automobile Engineering": [
+    "Automotive Engines",
+    "Vehicle Dynamics",
+    "Automotive Transmission",
+    "Automotive Electronics",
+    "Vehicle Design"
+  ],
+  "Artificial Intelligence and Data Science": [
+    "Python Programming",
+    "Statistics",
+    "Data Structures",
+    "Machine Learning",
+    "Artificial Intelligence",
+    "Data Analytics"
+  ],
+  "Chemical Engineering": [
+    "Chemical Process Calculations",
+    "Fluid Mechanics",
+    "Heat Transfer",
+    "Mass Transfer",
+    "Chemical Reaction Engineering"
+  ],
+  "Aerospace Engineering": [
+    "Aerodynamics",
+    "Aircraft Structures",
+    "Flight Mechanics",
+    "Propulsion",
+    "Aerospace Materials"
+  ]
+};
+
+const itiSubjects = {
+  "Electrician": ["Electrical Fundamentals", "Wiring", "Electrical Machines", "Workshop Calculation", "Employability Skills"],
+  "Fitter": ["Fitting Operations", "Engineering Drawing", "Workshop Calculation", "Machine Tools", "Employability Skills"],
+  "Welder": ["Welding Technology", "Welding Processes", "Engineering Drawing", "Workshop Calculation", "Employability Skills"],
+  "COPA": ["Computer Fundamentals", "Operating Systems", "Programming", "Database", "Web Applications", "Employability Skills"],
+  "Mechanic Diesel": ["Diesel Engines", "Fuel Systems", "Vehicle Maintenance", "Workshop Calculation", "Employability Skills"],
+  "Mechanic Motor Vehicle": ["Automobile Engines", "Vehicle Systems", "Automotive Electrical", "Vehicle Servicing", "Employability Skills"],
+  "Turner": ["Turning Operations", "Lathe Machine", "Engineering Drawing", "Workshop Calculation"],
+  "Machinist": ["Milling", "Grinding", "Machine Tools", "Engineering Drawing", "Workshop Calculation"],
+  "Plumber": ["Pipe Fittings", "Plumbing Systems", "Water Supply", "Workshop Calculation"],
+  "Draughtsman Mechanical": ["Mechanical Drawing", "CAD", "Machine Drawing", "Engineering Materials"],
+  "Electronics Mechanic": ["Electronic Components", "Digital Electronics", "Testing Instruments", "Electronic Circuits"]
+};
+
+/* School subjects are grouped by board and stream.
+   Actual subject combinations may differ between institutions. */
+
+const schoolSubjects = {
+  "Maharashtra HSC": {
+    "Science PCM": [
+      "English",
+      "Physics",
+      "Chemistry",
+      "Mathematics and Statistics",
+      "Computer Science",
+      "Information Technology",
+      "Physical Education"
+    ],
+    "Science PCB": [
+      "English",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Psychology",
+      "Information Technology",
+      "Physical Education"
+    ],
+    "Commerce": [
+      "English",
+      "Book Keeping and Accountancy",
+      "Organisation of Commerce and Management",
+      "Economics",
+      "Secretarial Practice",
+      "Mathematics and Statistics",
+      "Information Technology"
+    ],
+    "Arts": [
+      "English",
+      "History",
+      "Geography",
+      "Political Science",
+      "Psychology",
+      "Sociology",
+      "Economics"
+    ]
   },
-
-  "Class 11": {
-    branches: {
-      "Science (PCM)": {
-        "Class 11": ["Physics","Chemistry","Mathematics","English","Computer Science"]
-      },
-      "Science (PCB)": {
-        "Class 11": ["Physics","Chemistry","Biology","English","Computer Science"]
-      },
-      "Commerce": {
-        "Class 11": ["Accountancy","Business Studies","Economics","English","Mathematics"]
-      },
-      "Arts": {
-        "Class 11": ["History","Geography","Political Science","Sociology","English"]
-      }
-    }
+  "CBSE": {
+    "Science PCM": [
+      "English Core",
+      "Physics",
+      "Chemistry",
+      "Mathematics",
+      "Computer Science",
+      "Informatics Practices",
+      "Physical Education"
+    ],
+    "Science PCB": [
+      "English Core",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Psychology",
+      "Physical Education",
+      "Informatics Practices"
+    ],
+    "Commerce": [
+      "English Core",
+      "Accountancy",
+      "Business Studies",
+      "Economics",
+      "Mathematics",
+      "Applied Mathematics",
+      "Informatics Practices"
+    ],
+    "Arts": [
+      "English Core",
+      "History",
+      "Political Science",
+      "Geography",
+      "Economics",
+      "Sociology",
+      "Psychology"
+    ]
   },
-
-  "Class 12": {
-    branches: {
-      "Science (PCM)": {
-        "Class 12": ["Physics","Chemistry","Mathematics","English","Computer Science"]
-      },
-      "Science (PCB)": {
-        "Class 12": ["Physics","Chemistry","Biology","English","Computer Science"]
-      },
-      "Commerce": {
-        "Class 12": ["Accountancy","Business Studies","Economics","English","Mathematics"]
-      },
-      "Arts": {
-        "Class 12": ["History","Geography","Political Science","Sociology","English"]
-      }
-    }
-  },
-
-  "B.Tech": {
-    branches: {
-      "Computer Science Engineering": {
-        "Year 1": ["Engineering Mathematics","Engineering Physics","Programming","Basic Electrical Engineering"],
-        "Year 2": ["Data Structures","Computer Organization","Discrete Mathematics","Database Systems"],
-        "Year 3": ["Operating Systems","Computer Networks","Software Engineering","Artificial Intelligence"],
-        "Year 4": ["Machine Learning","Cloud Computing","Cyber Security","Project Work"]
-      },
-      "Mechanical Engineering": {
-        "Year 1": ["Engineering Mathematics","Engineering Physics","Engineering Mechanics"],
-        "Year 2": ["Thermodynamics","Fluid Mechanics","Manufacturing Processes"],
-        "Year 3": ["Machine Design","Heat Transfer","Theory of Machines"],
-        "Year 4": ["CAD/CAM","Robotics","Project Work"]
-      },
-      "Civil Engineering": {
-        "Year 1": ["Engineering Mathematics","Engineering Physics","Engineering Mechanics"],
-        "Year 2": ["Surveying","Building Materials","Fluid Mechanics"],
-        "Year 3": ["Structural Analysis","Geotechnical Engineering","Transportation Engineering"],
-        "Year 4": ["Design of Structures","Environmental Engineering","Project Work"]
-      },
-      "Electrical Engineering": {
-        "Year 1": ["Engineering Mathematics","Engineering Physics","Basic Electrical Engineering"],
-        "Year 2": ["Electrical Machines","Circuit Theory","Electromagnetic Fields"],
-        "Year 3": ["Power Systems","Control Systems","Power Electronics"],
-        "Year 4": ["Electrical Drives","Renewable Energy","Project Work"]
-      },
-      "Electronics and Telecommunication": {
-        "Year 1": ["Engineering Mathematics","Engineering Physics","Basic Electronics"],
-        "Year 2": ["Electronic Devices","Digital Electronics","Signals and Systems"],
-        "Year 3": ["Microprocessors","Communication Systems","VLSI"],
-        "Year 4": ["Embedded Systems","Wireless Communication","Project Work"]
-      }
-    }
-  },
-
-  "ITI": {
-    branches: {
-      "Fitter": {
-        "Year 1": ["Workshop Calculation","Engineering Drawing","Fitting Practical","Workshop Science"],
-        "Year 2": ["Advanced Fitting","Machine Tools","Maintenance","Trade Practical"]
-      },
-      "Electrician": {
-        "Year 1": ["Electrical Basics","Wiring","Electrical Drawing","Workshop Calculation"],
-        "Year 2": ["Electrical Machines","Power Systems","Electrical Maintenance","Trade Practical"]
-      },
-      "Welder": {
-        "Year 1": ["Welding Basics","Engineering Drawing","Workshop Calculation","Welding Practical"],
-        "Year 2": ["Advanced Welding","Welding Inspection","Welding Safety","Trade Practical"]
-      },
-      "Mechanic Motor Vehicle": {
-        "Year 1": ["Engine Basics","Automotive Electrical","Workshop Calculation","Vehicle Systems"],
-        "Year 2": ["Engine Repair","Transmission","Vehicle Diagnostics","Trade Practical"]
-      },
-      "COPA": {
-        "Year 1": ["Computer Fundamentals","Operating Systems","Office Applications","Internet"],
-        "Year 2": ["Programming Basics","Database","Web Design","Practical Training"]
-      },
-      "Electronics Mechanic": {
-        "Year 1": ["Electronic Components","Basic Circuits","Digital Electronics","Workshop Practice"],
-        "Year 2": ["Communication Electronics","Microcontrollers","Testing and Repair","Trade Practical"]
-      }
-    }
+  "ISC": {
+    "Science PCM": [
+      "English",
+      "Physics",
+      "Chemistry",
+      "Mathematics",
+      "Computer Science",
+      "Physical Education"
+    ],
+    "Science PCB": [
+      "English",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Psychology",
+      "Physical Education"
+    ],
+    "Commerce": [
+      "English",
+      "Accounts",
+      "Commerce",
+      "Economics",
+      "Business Studies",
+      "Mathematics"
+    ],
+    "Arts": [
+      "English",
+      "History",
+      "Political Science",
+      "Geography",
+      "Sociology",
+      "Psychology",
+      "Economics"
+    ]
   }
 };
 
-// =====================================
-// SAMPLE LEARNING CONTENT
-// Add verified content subject by subject.
-// =====================================
+function setOptions(element, values, placeholder) {
+  element.innerHTML = "";
+  const first = document.createElement("option");
+  first.value = "";
+  first.textContent = placeholder;
+  element.appendChild(first);
 
-const resourceData = {
-  "Strength of Materials": {
-    notes: [
-      "Stress is the internal resisting force per unit area developed in a material due to an external load.",
-      "Stress = Load / Cross-sectional Area.",
-      "Strain is the ratio of change in dimension to original dimension.",
-      "Strain = Change in length / Original length.",
-      "Hooke's Law: Within the elastic limit, stress is directly proportional to strain.",
-      "Young's Modulus = Stress / Strain."
-    ],
-    important: [
-      "State Hooke's Law. (2 marks)",
-      "Define stress and strain. (4 marks)",
-      "Define Young's modulus. (2 marks)",
-      "Explain different types of stresses. (4 marks)",
-      "Solve a numerical based on stress and strain. (Practice)"
-    ],
-    diagrams: [
-      "Stress-Strain Curve",
-      "Tensile Testing Arrangement",
-      "Types of Loading"
-    ],
-    formulas: [
-      "Stress = Load / Area",
-      "Strain = Change in length / Original length",
-      "Young's Modulus = Stress / Strain",
-      "Elongation = PL / AE"
-    ],
-    mcq: [
-      {q:"What is the SI unit of stress?",o:["Newton","Pascal","Joule","Watt"],a:1},
-      {q:"Strain is a:",o:["Force","Dimensionless quantity","Pressure","Energy"],a:1},
-      {q:"Hooke's Law is valid within the:",o:["Plastic limit","Elastic limit","Breaking point","Creep limit"],a:1}
-    ],
-    practice: [
-      {q:"State Hooke's Law.",marks:2,a:"Within the elastic limit, stress is directly proportional to strain."},
-      {q:"Define stress and strain.",marks:4,a:"Stress is the internal resisting force per unit area.\nStrain is the ratio of change in dimension to original dimension."}
-    ],
-    video:"strength of materials diploma engineering"
-  },
+  values.forEach(value => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    element.appendChild(option);
+  });
+}
 
-  "Flui
+function clearDownstream() {
+  setOptions(branch, [], "Select Branch / Stream");
+  setOptions(semester, [], "Select Semester / Year");
+  setOptions(subject, [], "Select Subject");
+}
+
+function updateCourseOptions() {
+  const selectedCourse = course.value;
+
+  clearDownstream();
+  setOptions(board, [], "Select Board");
+
+  schemeField.classList.add("hidden");
+  boardLabel.textContent = "Select Education Board";
+  branchLabel.textContent = "Select Branch / Stream";
+  semesterLabel.textContent = "Select Semester / Year";
+
+  if (!selectedCourse) {
+    selectionStatus.textContent = "Choose your course to get started.";
+    return;
+  }
+
+  if (selectedCourse === "diploma") {
+    setOptions(board, diplomaBoards, "Select Diploma Board");
+    schemeField.classList.remove("hidden");
+    branchLabel.textContent = "Select Engineering Branch";
+    semesterLabel.textContent = "Select Semester";
+  }
+
+  if (selectedCourse === "school11" || selectedCourse === "school12") {
+    setOptions(board, schoolBoards, "Select School Board");
+    boardLabel.textContent = "Select School Education Board";
+    branchLabel.textContent = "Select Stream";
+    semesterLabel.textContent = "Select Class";
+    setOptions(semester, [selectedCourse === "school11" ? "Class 11" : "Class 12"], "Select Class");
+  }
+
+  if (selectedCour
