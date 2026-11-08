@@ -233,9 +233,35 @@ footer {
     <option value="5">Semester 5</option>
     <option value="6">Semester 6</option>
   </select>
+<label>Choose your MSBTE Scheme</label>
 
-  <button onclick="openDiploma()">Explore My Diploma</button>
+<select id="dScheme">
+  <option value="K">K Scheme (2023 onwards)</option>
+  <option value="I">I Scheme (Older curriculum)</option>
+</select>
+
+<button onclick="openDiploma()">Explore My Diploma</button>
   <div id="dResult"></div>
+  <!-- DIPLOMA PYQ SECTION -->
+<section class="card" id="pyqSection">
+  <h2>📚 Previous Year Questions (PYQ)</h2>
+  <p>Practice diploma exam questions with answers.</p>
+
+  <label>Select Subject</label>
+  <select id="pyqSubject">
+    <option value="">Choose Subject</option>
+    <option value="som">Strength of Materials</option>
+    <option value="fmm">Fluid Mechanics and Machinery</option>
+    <option value="fme">Fundamentals of Mechanical Engineering</option>
+    <option value="automobile">Automobile Engineering</option>
+    <option value="thermo">Thermal Engineering</option>
+    <option value="manufacturing">Manufacturing Technology</option>
+  </select>
+
+  <button onclick="loadPYQ()">Show Questions</button>
+
+  <div id="pyqList"></div>
+</section>
 </section>
 <main>
 
@@ -438,6 +464,80 @@ renderTasks();
       <p>More diploma learning resources coming soon!</p>
     </div>
   `;
+}
+  const diplomaPYQ = {
+  som: [
+    {
+      question: "State Hooke's Law.",
+      marks: 2,
+      answer: "Within the elastic limit, stress is directly proportional to strain.\nFormula: Stress ∝ Strain."
+    },
+    {
+      question: "Define stress and strain.",
+      marks: 4,
+      answer: "Stress is the internal resisting force per unit area developed in a body due to external load.\nFormula: Stress = Load / Area.\n\nStrain is the ratio of change in dimension to original dimension.\nFormula: Strain = Change in length / Original length."
+    }
+  ],
+  fmm: [
+    {
+      question: "Define Bernoulli's theorem.",
+      marks: 4,
+      answer: "For steady, incompressible and frictionless flow, the total energy per unit weight remains constant along a streamline."
+    },
+    {
+      question: "Define a venturimeter.",
+      marks: 2,
+      answer: "A venturimeter is a device used to measure the flow rate of fluid through a pipe using the pressure difference."
+    }
+  ]
+};
+
+function loadPYQ() {
+  const subject = document.getElementById("pyqSubject").value;
+  const result = document.getElementById("pyqList");
+
+  if (!subject) {
+    result.textContent = "Please select a subject first.";
+    return;
+  }
+
+  const questions = diplomaPYQ[subject] || [];
+
+  if (questions.length === 0) {
+    result.textContent = "Questions for this subject are coming soon.";
+    return;
+  }
+
+  result.innerHTML = "";
+
+  questions.forEach((item, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.padding = "15px";
+    card.style.margin = "12px 0";
+
+    const heading = document.createElement("h4");
+    heading.textContent = "Q" + (index + 1) + ". " + item.question;
+
+    const marks = document.createElement("p");
+    marks.textContent = "Marks: " + item.marks;
+
+    const button = document.createElement("button");
+    button.textContent = "Show Answer";
+
+    const answer = document.createElement("p");
+    answer.hidden = true;
+    answer.style.whiteSpace = "pre-line";
+    answer.textContent = item.answer;
+
+    button.onclick = () => {
+      answer.hidden = !answer.hidden;
+      button.textContent = answer.hidden ? "Show Answer" : "Hide Answer";
+    };
+
+    card.append(heading, marks, button, answer);
+    result.appendChild(card);
+  });
 }
 </script>
 
