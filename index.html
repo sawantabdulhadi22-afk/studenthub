@@ -165,6 +165,16 @@
         <span>▤</span> Study resources
       </button>
 
+      <!-- NEW: ONLINE EXAMS -->
+
+      <button class="nav-item" data-page="exams">
+        <span>📝</span> Online exams
+      </button>
+
+      <button class="nav-item" data-page="exam-results">
+        <span>🏆</span> My exam results
+      </button>
+
       <button class="nav-item" data-page="homework">
         <span>✎</span> AI Homework Writer
       </button>
@@ -310,6 +320,12 @@
             <span>▤</span>
             <b>Study resources</b>
             <small>Notes, PYQs and answers</small>
+          </button>
+
+          <button class="feature-card" data-go="exams">
+            <span>📝</span>
+            <b>Online examinations</b>
+            <small>Attempt 20, 30 and 70-mark papers</small>
           </button>
 
           <button class="feature-card" data-go="homework">
@@ -626,7 +642,7 @@
 
             <div class="section-heading">
               <div>
-                <p class="eyebrow">STUDYHUB AI RESPONSE</p>
+                <p class="eyebrow">STUDENTHUB AI RESPONSE</p>
                 <h2>AI Answer</h2>
               </div>
 
@@ -831,6 +847,176 @@
       </section>
 
 
+      <!-- ONLINE EXAMS -->
+
+      <section class="page" id="page-exams">
+
+        <div class="page-heading">
+          <p class="eyebrow">TEST YOUR KNOWLEDGE</p>
+          <h1>Online examinations</h1>
+          <p class="muted">
+            Select your branch, semester, subject and paper format.
+          </p>
+        </div>
+
+        <div class="panel">
+
+          <div class="form-grid">
+
+            <label>Education
+              <select id="examCourse">
+                <option value="Diploma">Diploma</option>
+              </select>
+            </label>
+
+            <label>Board
+              <select id="examBoard">
+                <option value="MSBTE">MSBTE</option>
+              </select>
+            </label>
+
+            <label>Scheme
+              <select id="examScheme">
+                <option value="K Scheme">K Scheme</option>
+              </select>
+            </label>
+
+            <label>Branch
+              <input
+                id="examBranch"
+                list="examBranchOptions"
+                placeholder="Enter your branch"
+              >
+
+              <datalist id="examBranchOptions">
+                <option value="Mechanical Engineering">
+                <option value="Civil Engineering">
+                <option value="Computer Engineering">
+                <option value="Information Technology">
+                <option value="Electrical Engineering">
+                <option value="Automobile Engineering">
+                <option value="Electronics Engineering">
+                <option value="Food Technology">
+                <option value="Chemical Engineering">
+                <option value="Production Engineering">
+                <option value="Instrumentation Engineering">
+              </datalist>
+            </label>
+
+            <label>Semester
+              <select id="examTerm">
+                <option value="">Select semester</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+              </select>
+            </label>
+
+            <label>Subject
+              <input
+                id="examSubject"
+                maxlength="120"
+                placeholder="Enter subject name"
+              >
+            </label>
+
+            <label>Paper format
+              <select id="examFormat">
+                <option value="">All formats</option>
+                <option value="20">20 Marks</option>
+                <option value="30">30 Marks</option>
+                <option value="70">70 Marks</option>
+              </select>
+            </label>
+
+            <label>Paper type
+              <select id="examType">
+                <option value="">All papers</option>
+                <option value="PYQ">Previous Year Papers</option>
+                <option value="Practice">Practice Papers</option>
+              </select>
+            </label>
+
+          </div>
+
+          <button class="btn primary full mt-20" id="searchExamPapers">
+            Search papers
+          </button>
+
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AVAILABLE PAPERS</p>
+            <h2>Choose your examination</h2>
+          </div>
+        </div>
+
+        <div id="examPaperStatus" class="status-line"></div>
+        <div id="examPaperList" class="resource-grid"></div>
+
+      </section>
+
+
+      <!-- EXAM PLAYER -->
+
+      <section class="page" id="page-exam-player">
+
+        <div class="page-heading">
+          <p class="eyebrow">EXAMINATION IN PROGRESS</p>
+          <h1 id="activeExamTitle">Examination</h1>
+          <p class="muted" id="activeExamDetails"></p>
+        </div>
+
+        <div class="panel">
+
+          <div class="section-heading">
+
+            <div>
+              <p class="eyebrow">TIME REMAINING</p>
+              <h2 id="examTimer">--:--</h2>
+            </div>
+
+            <div>
+              <p class="eyebrow">TOTAL MARKS</p>
+              <h2 id="activeExamMarks">0</h2>
+            </div>
+
+          </div>
+
+          <div id="examQuestionStatus" class="status-line"></div>
+          <div id="examQuestionList"></div>
+
+          <button class="btn gold-btn full mt-20" id="submitExam">
+            Submit examination
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- EXAM RESULTS -->
+
+      <section class="page" id="page-exam-results">
+
+        <div class="page-heading">
+          <p class="eyebrow">YOUR PERFORMANCE</p>
+          <h1>My exam results</h1>
+          <p class="muted">
+            Review your submitted examinations and performance.
+          </p>
+        </div>
+
+        <div id="examResultsStatus" class="status-line"></div>
+        <div id="examResultsList" class="resource-grid"></div>
+
+      </section>
+
+
       <!-- ADMIN -->
 
       <section class="page" id="page-admin">
@@ -846,7 +1032,7 @@
         <div class="panel">
           <h2>Content management</h2>
           <p class="muted">
-            Manage and publish learning resources through the protected admin workflow.
+            Manage and publish learning resources and examination papers through the protected admin workflow.
           </p>
         </div>
 
