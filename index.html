@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentHub | Learn Better</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fc;
+  color: #172554;
+}
+header {
+  background: #172554;
+  color: white;
+  padding: 22px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header a { color: white; text-decoration: none; margin-left: 18px; }
+.hero {
+  padding: 65px 7%;
+  background: #e8efff;
+}
+.hero h1 { font-size: 42px; }
+.hero p { color: #52617b; }
+button {
+  background: #2563eb;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 13px 20px;
+  cursor: pointer;
+}
+main { padding: 35px 7%; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+  gap: 18px;
+}
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 3px 15px #0000000b;
+}
+.card p { color: #64748b; }
+.premium { border: 2px solid #c4a044; }
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #64748b;
+}
+@media(max-width:600px) {
+  header { flex-direction: column; gap: 15px; }
+  header a { margin: 5px; }
+  .hero h1 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h2>🎓 StudentHub</h2>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#tools">Tools</a>
+    <a href="#premium">Premium</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>Learn Smarter. Achieve More.</h1>
+  <p>Your learning space for notes, study tools and exam preparation.</p>
+  <button onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">
+    Explore StudentHub
+  </button>
+</section>
+
+<main>
+  <h2 id="tools">Your Study Space</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>📚 Study Planner</h3>
+      <p>Organize your daily learning tasks.</p>
+      <button onclick="addTask()">Add a task</button>
+      <ul id="tasks"></ul>
+    </div>
+
+    <div class="card">
+      <h3>📝 Notes Library</h3>
+      <p>Explore free learning resources.</p>
+      <a href="https://openstax.org/">OpenStax</a>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Exam Preparation</h3>
+      <p>Prepare and organize your revision.</p>
+      <button onclick="alert('Coming soon!')">Explore</button>
+    </div>
+
+    <div class="card premium" id="premium">
+      <h3>⭐ StudentHub Premium</h3>
+      <p>Unlock exclusive diagrams and advanced study tools.</p>
+      <h2>₹99/month</h2>
+      <button onclick="alert('Premium membership coming soon!')">
+        Explore Premium
+      </button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  StudentHub © 2026 | Made for students worldwide 🌍
+</footer>
+
+<script>
+function addTask() {
+  const task = prompt("Enter your study task:");
+  if (task && task.trim()) {
+    const li = document.createElement("li");
+    li.textContent = task.trim();
+    document.getElementById("tasks").appendChild(li);
+  }
+}
+</script>
+
+</body>
+</html>
