@@ -1,963 +1,209 @@
-HTML
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StudentHub | Study Smarter</title>
-
-<style>
-:root {
-  --bg: #080d18;
-  --panel: #111a2b;
-  --panel2: #172238;
-  --gold: #e8bd65;
-  --gold2: #f6d995;
-  --white: #f4f6fb;
-  --muted: #9ba9bd;
-  --border: rgba(255,255,255,.09);
-  --green: #69d6a0;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--white);
-  font-family: Inter, Arial, sans-serif;
-}
-button, input, select { font: inherit; }
-button { cursor: pointer; }
-header {
-  padding: 18px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-  background: #0b1220;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-}
-.logo {
-  font-size: 23px;
-  font-weight: 800;
-  letter-spacing: -.7px;
-}
-.logo span { color: var(--gold); }
-.header-tag {
-  color: var(--gold);
-  font-size: 12px;
-  border: 1px solid rgba(232,189,101,.35);
-  padding: 7px 12px;
-  border-radius: 30px;
-}
-main { max-width: 1200px; margin: auto; padding: 30px 5%; }
-.hero {
-  padding: 38px 30px;
-  border: 1px solid rgba(232,189,101,.2);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 85% 15%, rgba(232,189,101,.14), transparent 35%),
-    linear-gradient(135deg,#17243b,#0d1525);
-}
-.eyebrow {
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-h1 { font-size: clamp(30px,5vw,48px); margin: 12px 0; }
-.hero p { color: var(--muted); max-width: 600px; line-height: 1.7; }
-.gold { color: var(--gold); }
-.section { margin-top: 32px; }
-.section-title {
-  font-size: 21px;
-  margin: 0 0 15px;
-}
-.section-sub { color: var(--muted); font-size: 13px; margin-top: -7px; }
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 22px;
-}
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 17px;
-}
-.field label {
-  display: block;
-  color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 8px;
-}
-select, input {
-  width: 100%;
-  min-height: 46px;
-  color: var(--white);
-  background: #0b1424;
-  border: 1px solid #344158;
-  border-radius: 10px;
-  padding: 10px 12px;
-  outline: none;
-}
-select:focus, input:focus {
-  border-color: var(--gold);
-}
-select option { background: #111a2b; color: white; }
-.full { grid-column: 1/-1; }
-.selection-result {
-  margin-top: 18px;
-  padding: 14px;
-  background: rgba(232,189,101,.08);
-  border: 1px solid rgba(232,189,101,.2);
-  border-radius: 12px;
-  color: var(--gold2);
-  font-size: 13px;
-  line-height: 1.6;
-}
-.resource-grid {
-  display: grid;
-  grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 13px;
-}
-.resource {
-  text-align: left;
-  padding: 19px 15px;
-  min-height: 130px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  color: var(--white);
-  border-radius: 15px;
-  transition: .2s;
-}
-.resource:hover {
-  transform: translateY(-3px);
-  border-color: var(--gold);
-  background: var(--panel2);
-}
-.resource .emoji { font-size: 25px; display: block; margin-bottom: 13px; }
-.resource strong { display: block; font-size: 14px; }
-.resource small { display: block; color: var(--muted); margin-top: 7px; line-height: 1.4; }
-.two-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 17px;
-}
-.action-btn {
-  border: 0;
-  background: var(--gold);
-  color: #17130a;
-  border-radius: 10px;
-  padding: 12px 17px;
-  font-weight: 800;
-}
-.action-btn:hover { background: var(--gold2); }
-.secondary-btn {
-  background: #26344b;
-  color: white;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 10px 13px;
-}
-.task-list { margin-top: 14px; }
-.task {
-  padding: 11px 0;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--muted);
-}
-.task input { width: auto; min-height: auto; accent-color: var(--gold); }
-.task.done span { text-decoration: line-through; opacity: .55; }
-.flashcard {
-  min-height: 155px;
-  border: 1px solid rgba(232,189,101,.3);
-  background: linear-gradient(135deg,#1b2941,#111a2b);
-  border-radius: 15px;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  line-height: 1.6;
-}
-.flashcard small { display: block; color: var(--gold); margin-bottom: 10px; }
-footer {
-  margin-top: 40px;
-  border-top: 1px solid var(--border);
-  padding: 25px 5%;
-  color: var(--muted);
-  text-align: center;
-  font-size: 12px;
-  line-height: 1.7;
-}
-.notice {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
-  margin-top: 13px;
-}
-.hidden { display: none !important; }
-
-@media(max-width:750px) {
-  main { padding: 20px 4%; }
-  header { padding: 15px 4%; }
-  .resource-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .two-grid, .form-grid { grid-template-columns: 1fr; }
-  .full { grid-column: auto; }
-  .hero { padding: 28px 20px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>StudentHub | Study Smarter</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 </head>
-
 <body>
+  <div id="toast" class="toast" role="status"></div>
 
-<header>
-  <div class="logo">Student<span>Hub.</span></div>
-  <div class="header-tag">STUDY SMARTER</div>
-</header>
-
-<main>
-
-  <section class="hero">
-    <div class="eyebrow">YOUR PERSONAL LEARNING SPACE</div>
-    <h1>Learn Better.<br><span class="gold">Achieve More.</span></h1>
-    <p>
-      Your study space for notes, questions, practice, learning resources
-      and daily study planning.
-    </p>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title">01. Choose Your Education</h2>
-    <p class="section-sub">Select your course to find the relevant subjects.</p>
-
-    <div class="panel">
-      <div class="form-grid">
-
-        <div class="field">
-          <label for="course">Education / Course</label>
-          <select id="course">
-            <option value="">Select course</option>
-            <option value="diploma">Diploma Engineering</option>
-            <option value="class11">Class 11</option>
-            <option value="class12">Class 12</option>
-            <option value="btech">B.Tech / Engineering Degree</option>
-            <option value="iti">ITI</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="board" id="boardLabel">Board / University</label>
-          <select id="board" disabled>
-            <option value="">Select course first</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="branch" id="branchLabel">Branch / Stream / Trade</label>
-          <select id="branch" disabled>
-            <option value="">Select board first</option>
-          </select>
-        </div>
-
-        <div class="field hidden" id="schemeField">
-          <label for="scheme">Diploma Scheme</label>
-          <select id="scheme">
-            <option value="K Scheme">K Scheme</option>
-            <option value="I Scheme">I Scheme</option>
-            <option value="Other">Other / Not sure</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="term" id="termLabel">Semester / Year</label>
-          <select id="term" disabled>
-            <option value="">Select branch first</option>
-          </select>
-        </div>
-
-        <div class="field full">
-          <label for="subject">Select Subject</label>
-          <select id="subject" disabled>
-            <option value="">Select semester or year first</option>
-          </select>
-        </div>
-
+  <main id="authScreen" class="auth-shell">
+    <section class="auth-art">
+      <div class="brand"><span class="brand-mark">S</span><span>Student<span class="gold">Hub</span></span></div>
+      <div>
+        <p class="eyebrow">YOUR LEARNING JOURNEY STARTS HERE</p>
+        <h1>Study smarter.<br><span class="gold">Achieve more.</span></h1>
+        <p class="muted">One place for notes, solved questions, revision and AI-assisted study tools.</p>
       </div>
-
-      <div class="selection-result" id="selectionResult">
-        Select your education details to get started.
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title">02. Study Resources</h2>
-    <p class="section-sub">Choose a resource after selecting your subject.</p>
-
-    <div class="resource-grid">
-
-      <button class="resource" data-kind="notes">
-        <span class="emoji">📘</span>
-        <strong>Study Notes</strong>
-        <small>Find chapter-wise learning notes</small>
-      </button>
-
-      <button class="resource" data-kind="important questions">
-        <span class="emoji">⭐</span>
-        <strong>Important Questions</strong>
-        <small>Prepare important topics</small>
-      </button>
-
-      <button class="resource" data-kind="previous year question papers">
-        <span class="emoji">📄</span>
-        <strong>Previous Papers</strong>
-        <small>Search previous examination papers</small>
-      </button>
-
-      <button class="resource" data-kind="diagrams">
-        <span class="emoji">📐</span>
-        <strong>Diagrams</strong>
-        <small>Find diagrams and explanations</small>
-      </button>
-
-      <button class="resource" data-kind="formulas">
-        <span class="emoji">🧮</span>
-        <strong>Formulas</strong>
-        <small>Explore useful formulas</small>
-      </button>
-
-      <button class="resource" data-kind="video lectures">
-        <span class="emoji">▶️</span>
-        <strong>Video Lectures</strong>
-        <small>Learn through videos</small>
-      </button>
-
-      <button class="resource" data-kind="multiple choice questions with answers">
-        <span class="emoji">📝</span>
-        <strong>MCQ Practice</strong>
-        <small>Find practice questions</small>
-      </button>
-
-      <button class="resource" data-kind="syllabus">
-        <span class="emoji">📚</span>
-        <strong>Syllabus</strong>
-        <small>Search the subject syllabus</small>
-      </button>
-
-    </div>
-    <p class="notice">
-      Resource buttons open search results. Always check the board,
-      scheme and syllabus before relying on a paper or study material.
-    </p>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title">03. Your Study Planner</h2>
-    <div class="two-grid">
-
-      <div class="panel">
-        <h3>Add a study task</h3>
-        <div class="field">
-          <label for="taskInput">Task name</label>
-          <input id="taskInput" type="text" placeholder="Example: Revise Unit 1">
+      <div class="auth-art-footer">LEARN · PRACTISE · PROGRESS</div>
+    </section>
+    <section class="auth-panel">
+      <div class="auth-card">
+        <div class="mobile-brand brand"><span class="brand-mark">S</span><span>Student<span class="gold">Hub</span></span></div>
+        <div id="loginForm">
+          <p class="eyebrow">STUDENT ACCESS</p>
+          <h2>Welcome back</h2>
+          <p class="muted">Sign in to continue learning.</p>
+          <form id="signInForm" class="stack">
+            <label>Email address<input id="loginEmail" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+            <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password"></label>
+            <button class="text-button align-right" type="button" id="forgotLink">Forgot password?</button>
+            <button class="btn primary full" type="submit">Login</button>
+          </form>
+          <p class="auth-switch">New to StudentHub? <button class="text-button" id="showSignup">Create account</button></p>
         </div>
-        <br>
-        <div class="field">
-          <label for="taskDate">Study date</label>
-          <input id="taskDate" type="date">
+        <div id="signupForm" class="hidden">
+          <p class="eyebrow">JOIN STUDENTHUB</p><h2>Create your account</h2>
+          <p class="muted">Your own space for learning and progress.</p>
+          <form id="registerForm" class="stack">
+            <label>Full name<input id="signupName" required maxlength="80" placeholder="Your name"></label>
+            <label>Email address<input id="signupEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+            <label>Password<input id="signupPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></label>
+            <label>Confirm password<input id="signupConfirm" type="password" required minlength="8" placeholder="Repeat password"></label>
+            <button class="btn primary full" type="submit">Create account</button>
+          </form>
+          <p class="auth-switch">Already registered? <button class="text-button" id="showLogin">Login</button></p>
         </div>
-        <br>
-        <button class="action-btn" id="addTask">+ Add Task</button>
-        <div class="task-list" id="taskList"></div>
+        <div id="resetForm" class="hidden">
+          <p class="eyebrow">ACCOUNT RECOVERY</p><h2>Reset password</h2>
+          <p class="muted">We'll email you a secure reset link.</p>
+          <form id="resetPasswordForm" class="stack">
+            <label>Email address<input id="resetEmail" type="email" required placeholder="you@example.com"></label>
+            <button class="btn primary full" type="submit">Send reset link</button>
+          </form>
+          <button class="text-button" id="backToLogin">Back to login</button>
+        </div>
+        <div id="newPasswordForm" class="hidden">
+          <p class="eyebrow">NEW PASSWORD</p><h2>Choose a new password</h2>
+          <form id="updatePasswordForm" class="stack">
+            <label>New password<input id="newPassword" type="password" minlength="8" required></label>
+            <button class="btn primary full" type="submit">Update password</button>
+          </form>
+        </div>
       </div>
+      <p class="tiny muted center">Use your own account. Keep your password private.</p>
+    </section>
+  </main>
 
-      <div class="panel">
-        <h3>Study Flashcard</h3>
-        <p class="notice">Tap the card to reveal the other side.</p>
-        <div class="flashcard" id="flashcard">
-          <div>
-            <small>QUESTION</small>
-            <strong id="flashText">What is the best way to study?</strong>
+  <div id="appShell" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand sidebar-brand"><span class="brand-mark">S</span><span>Student<span class="gold">Hub</span></span></div>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav-list">
+        <button class="nav-item active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+        <button class="nav-item" data-page="resources"><span>▤</span> Study resources</button>
+        <button class="nav-item" data-page="homework"><span>✎</span> AI Homework Writer</button>
+        <button class="nav-item" data-page="planner"><span>▦</span> Study planner</button>
+        <button class="nav-item" data-page="library"><span>☆</span> My library</button>
+        <button class="nav-item" data-page="progress"><span>↗</span> Progress</button>
+        <button class="nav-item" data-page="membership"><span>◇</span> Membership</button>
+        <button class="nav-item hidden" id="adminNav" data-page="admin"><span>⚙</span> Admin</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="plan-mini"><span class="plan-dot"></span><div><b id="sidePlan">Free plan</b><small id="sideUsage">2 homework PDFs daily</small></div></div>
+        <button class="nav-item" data-page="profile"><span>◉</span> My profile</button>
+        <button class="nav-item" id="logoutBtn"><span>↪</span> Logout</button>
+      </div>
+    </aside>
+
+    <section class="main-area">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
+        <div><span class="muted tiny">STUDENT WORKSPACE</span><div class="top-title" id="topPageTitle">Dashboard</div></div>
+        <div class="top-actions"><span class="avatar" id="avatar">S</span><div class="user-top"><b id="topName">Student</b><small id="topPlan">Free plan</small></div></div>
+      </header>
+
+      <div class="content">
+        <section class="page active" id="page-dashboard">
+          <div class="welcome-row"><div><p class="eyebrow">YOUR LEARNING SPACE</p><h1>Hello, <span id="welcomeName">Student</span> 👋</h1><p class="muted">Pick up where you left off.</p></div><span class="date-chip" id="todayDate"></span></div>
+          <div class="hero-card"><div><p class="eyebrow">STUDY SMARTER · EVERY DAY</p><h2>Your goals.<br><span class="gold">Your progress.</span></h2><p>Keep your resources, assignments and revision organised in one place.</p><button class="btn gold-btn" data-go="resources">Explore resources</button></div><div class="hero-symbol">S<span>H</span></div></div>
+          <div class="stats-grid">
+            <article class="stat-card"><span class="stat-icon">▤</span><small>Saved resources</small><strong id="savedCount">0</strong></article>
+            <article class="stat-card"><span class="stat-icon">✎</span><small>PDFs generated today</small><strong id="pdfCount">0 / 2</strong></article>
+            <article class="stat-card"><span class="stat-icon">▦</span><small>Study tasks</small><strong id="taskCount">0</strong></article>
+            <article class="stat-card"><span class="stat-icon">◇</span><small>Your membership</small><strong id="planStat">Free</strong></article>
           </div>
-        </div>
-        <br>
-        <button class="secondary-btn" id="nextFlash">Next Flashcard</button>
+          <div class="section-heading"><div><p class="eyebrow">QUICK ACCESS</p><h2>Continue learning</h2></div></div>
+          <div class="feature-grid">
+            <button class="feature-card" data-go="resources"><span>▤</span><b>Study resources</b><small>Notes, PYQs and answers</small></button>
+            <button class="feature-card" data-go="homework"><span>✎</span><b>AI Homework Writer</b><small>Prepare printable drafts</small></button>
+            <button class="feature-card" data-go="planner"><span>▦</span><b>Study planner</b><small>Organise your tasks</small></button>
+            <button class="feature-card" data-go="progress"><span>↗</span><b>My progress</b><small>Review your activity</small></button>
+          </div>
+        </section>
+
+        <section class="page" id="page-resources">
+          <div class="page-heading"><p class="eyebrow">LEARN & REVISE</p><h1>Study resources</h1><p class="muted">Choose your education details to find relevant starter content.</p></div>
+          <div class="panel">
+            <div class="form-grid">
+              <label>Education<select id="course"><option value="">Select education</option><option>Diploma</option><option>Class 11</option><option>Class 12</option><option>B.Tech</option><option>ITI</option></select></label>
+              <label>Board / University<select id="board"><option value="">Select board</option></select></label>
+              <label>Stream / Branch / Trade<select id="branch"><option value="">Select stream or branch</option></select></label>
+              <label>Semester / Year<select id="term"><option value="">Select semester or year</option></select></label>
+              <label class="span-2">Subject<select id="subject"><option value="">Select subject</option></select></label>
+            </div>
+            <p id="selectionMessage" class="muted tiny">Select your education details to continue.</p>
+          </div>
+          <div class="section-heading"><div><p class="eyebrow">RESOURCE CENTRE</p><h2 id="resourceTitle">Choose a subject first</h2></div></div>
+          <div class="resource-grid" id="resourceGrid"></div>
+          <div class="panel content-preview hidden" id="resourcePreview"><div class="section-heading"><h2 id="previewTitle">Resource</h2><button class="text-button" id="closePreview">Close</button></div><div id="previewBody"></div></div>
+        </section>
+
+        <section class="page" id="page-homework">
+          <div class="page-heading"><p class="eyebrow">AI STUDY TOOL</p><h1>AI Homework Writer</h1><p class="muted">Create an editable answer draft and place it on your assignment paper.</p></div>
+          <div class="notice"><b>Use this as a study and drafting assistant.</b> Review every answer, correct errors and follow your teacher's rules before submitting work.</div>
+          <div class="homework-layout">
+            <div class="panel">
+              <h2>1. Upload your assignment</h2><p class="muted tiny">PDF with selectable text works best. For scanned PDFs, paste the questions into the text box below.</p>
+              <label class="upload-box"><span class="upload-icon">↑</span><b>Choose assignment PDF</b><small>PDF file, up to 10 MB</small><input id="questionPdf" type="file" accept="application/pdf"></label>
+              <div id="questionFileName" class="file-name">No assignment selected</div>
+              <label>Or paste your questions<textarea id="questionText" rows="6" placeholder="Paste assignment questions here..."></textarea></label>
+              <h2 class="mt-24">2. Upload your blank paper</h2>
+              <p class="muted tiny">Upload a blank assignment-page PDF or image. The generated text is placed over it.</p>
+              <label class="upload-box"><span class="upload-icon">↑</span><b>Choose blank paper template</b><small>PDF, PNG or JPG, up to 10 MB</small><input id="paperTemplate" type="file" accept="application/pdf,image/png,image/jpeg"></label>
+              <div id="paperFileName" class="file-name">No paper template selected</div>
+              <div class="form-grid one-col">
+                <label>Answer detail<select id="answerDetail"><option value="concise">Concise exam-style answers</option><option value="detailed">Detailed explanations</option></select></label>
+                <label>Ink colour<select id="inkColour"><option value="blue">Blue</option><option value="black">Black</option></select></label>
+                <label>Writing style<select id="writingStyle"><option value="neat">Neat</option><option value="italic">Slanted / italic</option></select></label>
+              </div>
+              <button class="btn primary full mt-20" id="generateHomework">Generate answer draft</button>
+              <p class="tiny muted" id="homeworkUsage">Free plan: 2 completed PDFs per day. Your second PDF includes a StudentHub watermark.</p>
+              <div id="homeworkStatus" class="status-line" aria-live="polite"></div>
+            </div>
+            <div class="panel">
+              <h2>3. Review & export</h2><p class="muted tiny">Check the generated answers before creating your printable PDF.</p>
+              <div id="answerPreview" class="answer-preview empty-state">Your answer draft will appear here.</div>
+              <button class="btn gold-btn full mt-20" id="exportHomework" disabled>Download printable PDF</button>
+              <p class="tiny muted">The PDF export runs in your browser. Uploaded files are stored privately only when the backend feature is enabled.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-planner">
+          <div class="page-heading"><p class="eyebrow">STAY CONSISTENT</p><h1>Study planner</h1><p class="muted">Create a simple study task list for your day.</p></div>
+          <div class="panel"><form id="taskForm" class="inline-form"><label class="grow">Study task<input id="taskInput" required maxlength="120" placeholder="Example: Revise Strength of Materials"></label><label>Due date<input id="taskDate" type="date"></label><button class="btn primary" type="submit">Add task</button></form><div id="taskList" class="task-list"></div></div>
+        </section>
+
+        <section class="page" id="page-library">
+          <div class="page-heading"><p class="eyebrow">YOUR SAVED ITEMS</p><h1>My library</h1><p class="muted">Resources you have bookmarked.</p></div>
+          <div id="libraryList" class="resource-grid"></div>
+        </section>
+
+        <section class="page" id="page-progress">
+          <div class="page-heading"><p class="eyebrow">YOUR ACTIVITY</p><h1>Progress</h1><p class="muted">A simple overview of your StudentHub activity.</p></div>
+          <div class="stats-grid"><article class="stat-card"><small>Saved resources</small><strong id="progressSaved">0</strong></article><article class="stat-card"><small>Tasks completed</small><strong id="progressTasks">0</strong></article><article class="stat-card"><small>Homework PDFs today</small><strong id="progressPdfs">0</strong></article></div>
+          <div class="panel"><h2>Keep building your study routine</h2><p class="muted">Complete planner tasks and save useful resources to build your personal learning library.</p></div>
+        </section>
+
+        <section class="page" id="page-membership">
+          <div class="page-heading"><p class="eyebrow">MEMBERSHIP</p><h1>Choose your learning plan</h1><p class="muted">Free access stays available. Pro features can be enabled after secure subscription setup.</p></div>
+          <div class="plans-grid">
+            <article class="plan-card"><p class="eyebrow">STARTER</p><h2>Free</h2><div class="price">₹0 <small>/ forever</small></div><ul><li>Limited notes and practice content</li><li>5 selected PYQs per subject (when available)</li><li>2 completed homework PDFs per day</li><li>Second PDF has StudentHub watermark</li><li>Basic planner and saved resources</li></ul><span class="current-plan">Your starting plan</span></article>
+            <article class="plan-card pro-plan"><p class="eyebrow">MORE TO EXPLORE</p><h2>Pro</h2><div class="price">₹99 <small>/ month proposed</small></div><ul><li>Expanded available study library</li><li>More practice and solved questions</li><li>Higher fair-use homework generation limit</li><li>No StudentHub watermark</li><li>Advanced study tools</li></ul><span class="muted tiny">Proposed price only. Payments are not active yet.</span></article>
+          </div>
+          <div class="notice">Do not pay anyone through this demo page. A real subscription requires a verified payment provider, backend payment confirmation and appropriate adult/guardian involvement where required.</div>
+        </section>
+
+        <section class="page" id="page-profile">
+          <div class="page-heading"><p class="eyebrow">ACCOUNT SETTINGS</p><h1>My profile</h1></div>
+          <div class="panel profile-panel"><div class="profile-avatar" id="profileAvatar">S</div><div class="profile-fields"><label>Full name<input id="profileName" maxlength="80"></label><label>Email<input id="profileEmail" disabled></label><label>Education<select id="profileEducation"><option value="">Not selected</option><option>Diploma</option><option>Class 11</option><option>Class 12</option><option>B.Tech</option><option>ITI</option></select></label><button class="btn primary" id="saveProfile">Save profile</button></div></div>
+        </section>
+
+        <section class="page" id="page-admin">
+          <div class="page-heading"><p class="eyebrow">RESTRICTED AREA</p><h1>Admin dashboard</h1><p class="muted">Only accounts marked as admin in the database can see this page.</p></div>
+          <div class="panel"><h2>Content management</h2><p class="muted">This starter admin area confirms role access. Add a protected content-management workflow before publishing resources to students.</p></div>
+        </section>
       </div>
-
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title">04. Useful Learning Websites</h2>
-    <div class="resource-grid">
-      <button class="resource" data-url="https://www.youtube.com">
-        <span class="emoji">▶️</span>
-        <strong>YouTube</strong>
-        <small>Video learning</small>
-      </button>
-      <button class="resource" data-url="https://www.khanacademy.org">
-        <span class="emoji">🎓</span>
-        <strong>Khan Academy</strong>
-        <small>Free educational lessons</small>
-      </button>
-      <button class="resource" data-url="https://www.nptel.ac.in">
-        <span class="emoji">🏫</span>
-        <strong>NPTEL</strong>
-        <small>Engineering courses</small>
-      </button>
-      <button class="resource" data-url="https://swayam.gov.in">
-        <span class="emoji">📖</span>
-        <strong>SWAYAM</strong>
-        <small>Online courses</small>
-      </button>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <strong class="gold">StudentHub</strong> — Study Smarter, Every Day.<br>
-  Independent student learning project. Not affiliated with any education board.
-</footer>
-
-<script>
-"use strict";
-
-/* GET PAGE ELEMENTS */
-const course = document.getElementById("course");
-const board = document.getElementById("board");
-const branch = document.getElementById("branch");
-const term = document.getElementById("term");
-const subject = document.getElementById("subject");
-const schemeField = document.getElementById("schemeField");
-const selectionResult = document.getElementById("selectionResult");
-
-/* EDUCATION OPTIONS */
-const educationData = {
-
-  diploma: {
-    boards: [
-      "MSBTE Maharashtra",
-      "BTEUP Uttar Pradesh",
-      "DTE Karnataka",
-      "TNDOTE Tamil Nadu",
-      "WBSCTE West Bengal"
-    ],
-    branches: [
-      "Mechanical Engineering",
-      "Civil Engineering",
-      "Computer Engineering",
-      "Information Technology",
-      "Electrical Engineering",
-      "Electronics Engineering",
-      "Automobile Engineering",
-      "Chemical Engineering",
-      "Artificial Intelligence and Machine Learning"
-    ],
-    terms: ["Semester 1","Semester 2","Semester 3","Semester 4","Semester 5","Semester 6"]
-  },
-
-  class11: {
-    boards: ["Maharashtra HSC","CBSE","ISC"],
-    branches: ["Science PCM","Science PCB","Commerce","Arts"],
-    terms: ["Full Year"]
-  },
-
-  class12: {
-    boards: ["Maharashtra HSC","CBSE","ISC"],
-    branches: ["Science PCM","Science PCB","Commerce","Arts"],
-    terms: ["Full Year"]
-  },
-
-  btech: {
-    boards: [
-      "Mumbai University",
-      "SPPU Pune",
-      "AKTU",
-      "VTU",
-      "Other University"
-    ],
-    branches: [
-      "Mechanical Engineering",
-      "Civil Engineering",
-      "Computer Science Engineering",
-      "Information Technology",
-      "Electrical Engineering",
-      "Electronics and Communication",
-      "Automobile Engineering",
-      "Artificial Intelligence and Data Science",
-      "Chemical Engineering"
-    ],
-    terms: ["First Year","Second Year","Third Year","Fourth Year"]
-  },
-
-  iti: {
-    boards: ["NCVT","SCVT"],
-    branches: [
-      "Fitter",
-      "Electrician",
-      "Welder",
-      "Turner",
-      "Machinist",
-      "Mechanic Motor Vehicle",
-      "COPA",
-      "Electronics Mechanic",
-      "Diesel Mechanic",
-      "Plumber",
-      "Draughtsman Civil"
-    ],
-    terms: ["First Year","Second Year"]
-  }
-};
-
-/* SUBJECT OPTIONS */
-const diplomaSubjects = {
-  "Mechanical Engineering": [
-    ["Communication Skills","Engineering Mathematics","Engineering Graphics","Workshop Practice","Basic Science"],
-    ["Applied Mathematics","Applied Science","Basic Mechanical Engineering","Engineering Drawing","Workshop Technology"],
-    ["Strength of Materials","Fluid Mechanics","Manufacturing Technology","Thermal Engineering","Mechanical Measurements"],
-    ["Theory of Machines","Machine Design","Production Technology","Metrology","Industrial Engineering"],
-    ["Design of Machine Elements","Power Engineering","CAD/CAM","Automobile Engineering","Industrial Management"],
-    ["Maintenance Engineering","Refrigeration and Air Conditioning","CNC Technology","Project Work","Entrepreneurship"]
-  ],
-  "Civil Engineering": [
-    ["Communication Skills","Engineering Mathematics","Engineering Graphics","Basic Science"],
-    ["Applied Mathematics","Building Materials","Surveying","Engineering Drawing"],
-    ["Strength of Materials","Building Construction","Concrete Technology","Surveying"],
-    ["Structural Mechanics","Hydraulics","Transportation Engineering","Geotechnical Engineering"],
-    ["Design of Structures","Environmental Engineering","Estimation and Costing","Construction Management"],
-    ["Advanced Surveying","Water Resources Engineering","Project Work","Entrepreneurship"]
-  ],
-  "Computer Engineering": [
-    ["Communication Skills","Engineering Mathematics","Fundamentals of ICT","Basic Science"],
-    ["Programming in C","Web Page Designing","Database Fundamentals","Digital Techniques"],
-    ["Data Structures","Object Oriented Programming","Computer Networks","Database Management"],
-    ["Java Programming","Operating Systems","Software Engineering","Microprocessor"],
-    ["Python Programming","Cloud Computing","Cyber Security","Mobile Application Development"],
-    ["Project Work","Advanced Networking","Emerging Technologies","Entrepreneurship"]
-  ],
-  "Information Technology": [
-    ["Communication Skills","Engineering Mathematics","Fundamentals of ICT","Basic Science"],
-    ["Programming in C","Web Designing","Database Fundamentals","Digital Techniques"],
-    ["Data Structures","Computer Networks","Database Management","Object Oriented Programming"],
-    ["Java Programming","Operating Systems","Software Engineering","Web Development"],
-    ["Python Programming","Cloud Computing","Cyber Security","Mobile Computing"],
-    ["Project Work","Advanced Web Technology","Emerging Technologies","Entrepreneurship"]
-  ],
-  "Electrical Engineering": [
-    ["Communication Skills","Engineering Mathematics","Basic Electrical Engineering","Basic Science"],
-    ["Electrical Circuits","Electrical Measurements","Engineering Drawing","Applied Science"],
-    ["Electrical Machines","Electrical Networks","Electronic Devices","Power Generation"],
-    ["Power Systems","Electrical Installation","Control Systems","Electrical Measurements"],
-    ["Electrical Drives","Switchgear and Protection","Renewable Energy","Utilization of Electrical Energy"],
-    ["Project Work","Power Electronics","Energy Management","Entrepreneurship"]
-  ],
-  "Electronics Engineering": [
-    ["Communication Skills","Engineering Mathematics","Basic Electronics","Basic Science"],
-    ["Electronic Components","Digital Techniques","Electrical Circuits","Engineering Drawing"],
-    ["Analog Electronics","Digital Electronics","Electronic Measurements","Microprocessors"],
-    ["Communication Systems","Microcontrollers","Electronic Instruments","Computer Networks"],
-    ["Embedded Systems","Power Electronics","Industrial Electronics","Wireless Communication"],
-    ["Project Work","VLSI Basics","Emerging Technologies","Entrepreneurship"]
-  ],
-  "Automobile Engineering": [
-    ["Communication Skills","Engineering Mathematics","Engineering Graphics","Basic Science"],
-    ["Automotive Engines","Automotive Chassis","Workshop Technology","Applied Science"],
-    ["Strength of Materials","Automotive Transmission","Automotive Electrical Systems","Fluid Mechanics"],
-    ["Vehicle Maintenance","Automotive Electronics","Automotive Safety","Thermal Engineering"],
-    ["Automotive Pollution","Vehicle Testing","Automotive Air Conditioning","Production Technology"],
-    ["Project Work","Advanced Vehicle Technology","Entrepreneurship","Industrial Management"]
-  ],
-  "Chemical Engineering": [
-    ["Communication Skills","Engineering Mathematics","Basic Chemistry","Engineering Graphics"],
-    ["Chemical Process Principles","Material Science","Basic Mechanical Engineering","Applied Science"],
-    ["Fluid Flow","Heat Transfer","Mass Transfer","Chemical Technology"],
-    ["Chemical Reaction Engineering","Process Equipment","Instrumentation","Thermodynamics"],
-    ["Process Control","Plant Utilities","Environmental Engineering","Industrial Safety"],
-    ["Project Work","Plant Design","Entrepreneurship","Industrial Management"]
-  ],
-  "Artificial Intelligence and Machine Learning": [
-    ["Communication Skills","Engineering Mathematics","Fundamentals of ICT","Basic Science"],
-    ["Programming in Python","Database Fundamentals","Digital Techniques","Web Designing"],
-    ["Data Structures","Statistics","Object Oriented Programming","Computer Networks"],
-    ["Machine Learning Basics","Data Analytics","Database Management","Operating Systems"],
-    ["Artificial Intelligence","Deep Learning Basics","Cloud Computing","Cyber Security"],
-    ["Project Work","Data Science Applications","Emerging Technologies","Entrepreneurship"]
-  ]
-};
-
-const schoolSubjects = {
-  "Science PCM": [
-    "Physics","Chemistry","Mathematics","English","Computer Science","Physical Education"
-  ],
-  "Science PCB": [
-    "Physics","Chemistry","Biology","English","Computer Science","Physical Education"
-  ],
-  "Commerce": [
-    "Accountancy","Business Studies","Economics","English","Mathematics","Secretarial Practice"
-  ],
-  "Arts": [
-    "History","Geography","Political Science","Psychology","Sociology","English","Economics"
-  ]
-};
-
-const btechSubjects = {
-  "Mechanical Engineering": ["Engineering Mathematics","Engineering Mechanics","Thermodynamics","Fluid Mechanics","Manufacturing Processes","Machine Design","Heat Transfer"],
-  "Civil Engineering": ["Engineering Mathematics","Engineering Mechanics","Surveying","Structural Analysis","Geotechnical Engineering","Hydraulics","Concrete Technology"],
-  "Computer Science Engineering": ["Programming","Data Structures","Algorithms","Database Systems","Operating Systems","Computer Networks","Artificial Intelligence"],
-  "Information Technology": ["Programming","Web Technology","Database Systems","Computer Networks","Software Engineering","Cloud Computing","Cyber Security"],
-  "Electrical Engineering": ["Circuit Theory","Electrical Machines","Power Systems","Control Systems","Power Electronics","Electrical Measurements"],
-  "Electronics and Communication": ["Electronic Devices","Digital Electronics","Signals and Systems","Communication Systems","Microprocessors","VLSI"],
-  "Automobile Engineering": ["Automotive Engines","Vehicle Dynamics","Automotive Transmission","Automotive Electronics","Thermal Engineering","Vehicle Design"],
-  "Artificial Intelligence and Data Science": ["Programming","Statistics","Data Structures","Machine Learning","Artificial Intelligence","Data Analytics","Deep Learning"],
-  "Chemical Engineering": ["Chemical Process Principles","Fluid Mechanics","Heat Transfer","Mass Transfer","Chemical Reaction Engineering","Process Control"]
-};
-
-const itiSubjects = {
-  "Fitter": ["Workshop Calculation","Engineering Drawing","Fitting Operations","Tools and Equipment","Practical Training"],
-  "Electrician": ["Electrical Theory","Electrical Machines","Wiring","Electrical Measurements","Practical Training"],
-  "Welder": ["Welding Theory","Welding Processes","Welding Safety","Engineering Drawing","Practical Training"],
-  "Turner": ["Workshop Calculation","Engineering Drawing","Lathe Operations","Cutting Tools","Practical Training"],
-  "Machinist": ["Workshop Calculation","Engineering Drawing","Milling","Grinding","Practical Training"],
-  "Mechanic Motor Vehicle": ["Automobile Fundamentals","Engine Systems","Transmission","Vehicle Electrical Systems","Practical Training"],
-  "COPA": ["Computer Fundamentals","Operating Systems","Programming","Database","Web Designing"],
-  "Electronics Mechanic": ["Basic Electronics","Electronic Components","Digital Electronics","Testing Instruments","Practical Training"],
-  "Diesel Mechanic": ["Diesel Engine","Fuel Systems","Cooling Systems","Engine Maintenance","Practical Training"],
-  "Plumber": ["Plumbing Tools","Pipe Fittings","Water Supply","Sanitation","Practical Training"],
-  "Draughtsman Civil": ["Engineering Drawing","Building Materials","Building Drawing","Surveying","CAD"]
-};
-
-/* DROPDOWN HELPERS */
-function setOptions(element, options, placeholder) {
-  element.innerHTML = "";
-  const first = document.createElement("option");
-  first.value = "";
-  first.textContent = placeholder;
-  element.appendChild(first);
-
-  options.forEach(item => {
-    const option = document.createElement("option");
-    option.value = item;
-    option.textContent = item;
-    element.appendChild(option);
-  });
-
-  element.disabled = options.length === 0;
-}
-
-function resetDownstream() {
-  setOptions(branch, [], "Select board first");
-  setOptions(term, [], "Select branch first");
-  setOptions(subject, [], "Select semester or year first");
-  selectionResult.textContent = "Continue selecting your education details.";
-}
-
-function updateCourseOptions() {
-  const selectedCourse = course.value;
-  resetDownstream();
-
-  if (!selectedCourse || !educationData[selectedCourse]) {
-    setOptions(board, [], "Select course first");
-    schemeField.classList.add("hidden");
-    return;
-  }
-
-  const config = educationData[selectedCourse];
-  setOptions(board, config.boards, "Select board / university");
-
-  schemeField.classList.toggle("hidden", selectedCourse !== "diploma");
-
-  if (selectedCourse === "class11" || selectedCourse === "class12") {
-    document.getElementById("branchLabel").textContent = "Stream";
-    document.getElementById("termLabel").textContent = "Academic Session";
-  } else if (selectedCourse === "iti") {
-    document.getElementById("branchLabel").textContent = "Trade";
-    document.getElementById("termLabel").textContent = "Training Year";
-  } else if (selectedCourse === "btech") {
-    document.getElementById("branchLabel").textContent = "Engineering Branch";
-    document.getElementById("termLabel").textContent = "Academic Year";
-  } else {
-    document.getElementById("branchLabel").textContent = "Engineering Branch";
-    document.getElementById("termLabel").textContent = "Semester";
-  }
-}
-
-function updateBranches() {
-  const selectedCourse = course.value;
-  const config = educationData[selectedCourse];
-
-  setOptions(term, [], "Select branch first");
-  setOptions(subject, [], "Select semester or year first");
-
-  if (!config || !board.value) {
-    setOptions(branch, [], "Select board first");
-    return;
-  }
-
-  setOptions(branch, config.branches, "Select branch / stream / trade");
-  selectionResult.textContent = "Now select your branch, stream or trade.";
-}
-
-function updateTerms() {
-  const selectedCourse = course.value;
-  const config = educationData[selectedCourse];
-
-  setOptions(subject, [], "Select semester or year first");
-
-  if (!config || !branch.value) {
-    setOptions(term, [], "Select branch first");
-    return;
-  }
-
-  setOptions(term, config.terms, "Select semester / year");
-
-  if (selectedCourse === "class11" || selectedCourse === "class12") {
-    updateSubjects();
-  }
-
-  selectionResult.textContent = "Now select your semester or year, then your subject.";
-}
-
-function updateSubjects() {
-  const selectedCourse = course.value;
-  const selectedBranch = branch.value;
-  const selectedTerm = term.value;
-
-  let subjects = [];
-
-  if (!selectedCourse || !selectedBranch) {
-    setOptions(subject, [], "Select branch first");
-    return;
-  }
-
-  if (selectedCourse === "class11" || selectedCourse === "class12") {
-    subjects = schoolSubjects[selectedBranch] || [];
-  }
-
-  if (selectedCourse === "diploma" && selectedTerm) {
-    const branchList = diplomaSubjects[selectedBranch];
-    const semesterNumber = Number(selectedTerm.match(/\d+/)?.[0] || 1);
-    subjects = branchList ? (branchList[semesterNumber - 1] || []) : [];
-  }
-
-  if (selectedCourse === "btech" && selectedTerm) {
-    subjects = btechSubjects[selectedBranch] || [];
-  }
-
-  if (selectedCourse === "iti" && selectedTerm) {
-    subjects = itiSubjects[selectedBranch] || [];
-  }
-
-  setOptions(subject, subjects, "Select subject");
-
-  if (subjects.length === 0) {
-    selectionResult.textContent = "No subject list is available for this selection yet.";
-    return;
-  }
-  selectionResult.textContent =
-    "Your selection: " + course.options[course.selectedIndex].text +
-    " → " + board.value +
-    " → " + selectedBranch +
-    (selectedTerm ? " → " + selectedTerm : "") +
-    ". Now choose a subject.";
-}
-
-function updateSelectionResult() {
-  if (!subject.value) return;
-
-  selectionResult.textContent =
-    "Selected: " + course.options[course.selectedIndex].text +
-    " | " + board.value +
-    " | " + branch.value +
-    (term.value ? " | " + term.value : "") +
-    " | Subject: " + subject.value;
-}
-
-/* CONNECT ALL DROPDOWNS */
-course.addEventListener("change", updateCourseOptions);
-board.addEventListener("change", updateBranches);
-branch.addEventListener("change", updateTerms);
-term.addEventListener("change", updateSubjects);
-subject.addEventListener("change", updateSelectionResult);
-
-/* RESOURCE SEARCH */
-document.querySelectorAll("[data-kind]").forEach(button => {
-  button.addEventListener("click", () => {
-    if (!course.value || !board.value || !branch.value || !subject.value) {
-      alert("Please select your course, board, branch and subject first.");
-      return;
-    }
-
-    const kind = button.dataset.kind;
-    const courseName = course.options[course.selectedIndex].text;
-    const scheme = course.value === "diploma"
-      ? document.getElementById("scheme").value
-      : "";
-
-    const searchText = [
-      subject.value,
-      kind,
-      courseName,
-      board.value,
-      branch.value,
-      term.value,
-      scheme,
-      "India"
-    ].filter(Boolean).join(" ");
-
-    const url = "https://www.google.com/search?q=" + encodeURIComponent(searchText);
-    window.open(url, "_blank", "noopener");
-  });
-});
-
-/* USEFUL WEBSITES */
-document.querySelectorAll("[data-url]").forEach(button => {
-  button.addEventListener("click", () => {
-    window.open(button.dataset.url, "_blank", "noopener");
-  });
-});
-
-/* STUDY PLANNER */
-const taskInput = document.getElementById("taskInput");
-const taskDate = document.getElementById("taskDate");
-const taskList = document.getElementById("taskList");
-const addTaskButton = document.getElementById("addTask");
-
-let tasks = [];
-
-try {
-  tasks = JSON.parse(localStorage.getItem("studenthub_tasks") || "[]");
-  if (!Array.isArray(tasks)) tasks = [];
-} catch (error) {
-  tasks = [];
-}
-
-function saveTasks() {
-  try {
-    localStorage.setItem("studenthub_tasks", JSON.stringify(tasks));
-  } catch (error) {
-    console.log("Task storage is unavailable.");
-  }
-}
-
-function renderTasks() {
-  taskList.innerHTML = "";
-
-  if (tasks.length === 0) {
-    taskList.textContent = "No study tasks added yet.";
-    taskList.style.color = "#9ba9bd";
-    taskList.style.fontSize = "13px";
-    return;
-  }
-
-  tasks.forEach((task, index) => {
-    const row = document.createElement("div");
-    row.className = "task" + (task.done ? " done" : "");
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = task.done;
-
-    checkbox.addEventListener("change", () => {
-      tasks[index].done = checkbox.checked;
-      saveTasks();
-      renderTasks();
-    });
-       const label = document.createElement("span");
-    label.textContent = task.name + (task.date ? " — " + task.date : "");
-    label.style.flex = "1";
-
-    const remove = document.createElement("button");
-    remove.textContent = "×";
-    remove.className = "secondary-btn";
-    remove.addEventListener("click", () => {
-      tasks.splice(index, 1);
-      saveTasks();
-      renderTasks();
-    });
-
-    row.append(checkbox, label, remove);
-    taskList.appendChild(row);
-  });
-}
-
-addTaskButton.addEventListener("click", () => {
-  const name = taskInput.value.trim();
-
-  if (!name) {
-    alert("Please enter a task name.");
-    return;
-  }
-
-  tasks.push({
-    name: name,
-    date: taskDate.value,
-    done: false
-  });
-
-  saveTasks();
-  renderTasks();
-  taskInput.value = "";
-});
-
-renderTasks();
-
-/* FLASHCARDS */
-const flashcards = [
-  {
-    question: "What is the best way to study?",
-    answer: "Study regularly, understand concepts and practise questions."
-  },
-  {
-    question: "Why should you revise?",
-    answer: "Revision helps strengthen your understanding and memory."
-  },
-  {
-    question: "What is active learning?",
-    answer: "Learning by solving questions, explaining ideas and practising."
-  },
-  {
-    question: "How can you prepare for exams?",
-    answer: "Follow your syllabus, practise papers and revise important topics."
-  }
-];
-
-let flashIndex = 0;
-let showingAnswer = false;
-
-function showFlashcard() {
-  const card = flashcards[flashIndex];
-  document.getElementById("flashText").textContent =
-    showingAnswer ? card.answer : card.question;
-
-  document.querySelector("#flashcard small").textContent =
-    showingAnswer ? "ANSWER" : "QUESTION";
-}
-
-document.getElementById("flashcard").addEventListener("click", () => {
-  showingAnswer = !showingAnswer;
-  showFlashcard();
-});
-
-document.getElementById("nextFlash").addEventListener("click", () => {
-  flashIndex = (flashIndex + 1) % flashcards.length;
-  showingAnswer = false;
-  showFlashcard();
-});
-
-/* INITIALIZE */
-updateCourseOptions();
-showFlashcard();
-</script>
-
+    </section>
+  </div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
-
-  
-    
